@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
     <title>TodoApp | shopping list</title>
   </head>
   <body>
@@ -106,115 +112,113 @@
       </nav>
     </header>
 
-    <main>
-      <section class="items">
-        <input
-          class="items__add"
-          type="text"
-          name="add-item"
-          id=""
-          placeholder="Add item..."
-        />
-        <h2 class="items__name">Products:</h2>
-        <ul class="items__list">
-          <li class="items__item item">
-            <div class="item__desc">
+    <section class="items">
+      <input
+        class="items__add"
+        type="text"
+        name="add-item"
+        id=""
+        placeholder="Add item..."
+      />
+      <h2 class="items__name">Products:</h2>
+      <ul class="items__list">
+        <li class="items__item item">
+          <div class="item__desc">
+            <input
+              type="checkbox"
+              name=""
+              id=""
+              checked="true"
+              class="item__status"
+            />
+            <p class="item__name">Milk</p>
+            <div class="item__quantity quantity">
+              <button class="quantity__minus">-</button>
               <input
-                type="checkbox"
-                name=""
-                id=""
-                checked="true"
-                class="item__status"
+                class="quantity__number"
+                type="number"
+                name="item-quantity"
               />
-              <p class="item__name">Milk</p>
-              <div class="item__quantity quantity">
-                <button class="quantity__minus">-</button>
-                <input
-                  class="quantity__number"
-                  type="number"
-                  name="item-quantity"
-                />
-                <button class="quantity__plus">+</button>
-              </div>
+              <button class="quantity__plus">+</button>
             </div>
-            <div class="item__del">
-              <button class="del-btn">delete</button>
+          </div>
+          <div class="item__del">
+            <button class="del-btn">delete</button>
+          </div>
+        </li>
+        <li class="items__item item">
+          <div class="item__desc">
+            <input type="checkbox" name="" id="" class="item__status" />
+            <p class="item__name">Bread</p>
+            <div class="item__quantity quantity">
+              <button class="quantity__minus">-</button>
+              <input
+                class="quantity__number"
+                type="number"
+                name="item-quantity"
+              />
+              <button class="quantity__plus">+</button>
             </div>
-          </li>
-          <li class="items__item item">
-            <div class="item__desc">
-              <input type="checkbox" name="" id="" class="item__status" />
-              <p class="item__name">Bread</p>
-              <div class="item__quantity quantity">
-                <button class="quantity__minus">-</button>
-                <input
-                  class="quantity__number"
-                  type="number"
-                  name="item-quantity"
-                />
-                <button class="quantity__plus">+</button>
-              </div>
+          </div>
+          <div class="item__del">
+            <button class="del-btn">delete</button>
+          </div>
+        </li>
+        <li class="items__item item">
+          <div class="item__desc">
+            <input type="checkbox" name="" id="" class="item__status" />
+            <p class="item__name">Apple</p>
+            <div class="item__quantity quantity">
+              <button class="quantity__minus">-</button>
+              <input
+                class="quantity__number"
+                type="number"
+                name="item-quantity"
+              />
+              <button class="quantity__plus">+</button>
             </div>
-            <div class="item__del">
-              <button class="del-btn">delete</button>
+          </div>
+          <div class="item__del">
+            <button class="del-btn">delete</button>
+          </div>
+        </li>
+        <li class="items__item item">
+          <div class="item__desc">
+            <input type="checkbox" name="" id="" class="item__status" />
+            <p class="item__name">Avocado</p>
+            <div class="item__quantity quantity">
+              <button class="quantity__minus">-</button>
+              <input
+                class="quantity__number"
+                type="number"
+                name="item-quantity"
+              />
+              <button class="quantity__plus">+</button>
             </div>
-          </li>
-          <li class="items__item item">
-            <div class="item__desc">
-              <input type="checkbox" name="" id="" class="item__status" />
-              <p class="item__name">Apple</p>
-              <div class="item__quantity quantity">
-                <button class="quantity__minus">-</button>
-                <input
-                  class="quantity__number"
-                  type="number"
-                  name="item-quantity"
-                />
-                <button class="quantity__plus">+</button>
-              </div>
+          </div>
+          <div class="item__del">
+            <button class="del-btn">delete</button>
+          </div>
+        </li>
+        <li class="items__item item">
+          <div class="item__desc">
+            <input type="checkbox" name="" id="" class="item__status" />
+            <p class="item__name">Greek Yogurt</p>
+            <div class="item__quantity quantity">
+              <button class="quantity__minus">-</button>
+              <input
+                class="quantity__number"
+                type="number"
+                name="item-quantity"
+              />
+              <button class="quantity__plus">+</button>
             </div>
-            <div class="item__del">
-              <button class="del-btn">delete</button>
-            </div>
-          </li>
-          <li class="items__item item">
-            <div class="item__desc">
-              <input type="checkbox" name="" id="" class="item__status" />
-              <p class="item__name">Avocado</p>
-              <div class="item__quantity quantity">
-                <button class="quantity__minus">-</button>
-                <input
-                  class="quantity__number"
-                  type="number"
-                  name="item-quantity"
-                />
-                <button class="quantity__plus">+</button>
-              </div>
-            </div>
-            <div class="item__del">
-              <button class="del-btn">delete</button>
-            </div>
-          </li>
-          <li class="items__item item">
-            <div class="item__desc">
-              <input type="checkbox" name="" id="" class="item__status" />
-              <p class="item__name">Greek Yogurt</p>
-              <div class="item__quantity quantity">
-                <button class="quantity__minus">-</button>
-                <input
-                  class="quantity__number"
-                  type="number"
-                  name="item-quantity"
-                />
-                <button class="quantity__plus">+</button>
-              </div>
-            </div>
-            <div class="item__del">
-              <button class="del-btn">delete</button>
-            </div>
-          </li>
-        </ul>
-      </section>
-    </main>
+          </div>
+          <div class="item__del">
+            <button class="del-btn">delete</button>
+          </div>
+        </li>
+      </ul>
+    </section>
   </body>
 </html>

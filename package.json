@@ -16,7 +16,5 @@
     "url": "https://github.com/bm64/TodoApp/issues"
   },
   "homepage": "https://github.com/bm64/TodoApp#readme",
-  "dependencies": {
-    "firebase": "^8.4.1"
-  }
+  "dependencies": {}
 }

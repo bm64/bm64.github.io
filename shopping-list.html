@@ -124,98 +124,327 @@
       <ul class="items__list">
         <li class="items__item item">
           <div class="item__desc">
-            <input
-              type="checkbox"
-              name=""
-              id=""
-              checked="true"
-              class="item__status"
-            />
-            <p class="item__name">Milk</p>
+            <label class="item__label item__label--checked">
+              <input type="checkbox" checked class="item__status" />
+              <span class="item__name"> Milk </span>
+            </label>
             <div class="item__quantity quantity">
-              <button class="quantity__minus">-</button>
+              <button class="quantity__minus">
+                <svg
+                  width="16"
+                  height="2"
+                  viewBox="0 0 16 2"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M15 1H1"
+                    stroke="#333333"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </button>
               <input
                 class="quantity__number"
                 type="number"
                 name="item-quantity"
+                value="1"
               />
-              <button class="quantity__plus">+</button>
+              <button class="quantity__plus">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M8 15V8M8 8V1M8 8H15M8 8H1"
+                    stroke="#333333"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </button>
+              <button class="quantity__del-btn">
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 32 32"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M12 12H14V24H12V12Z" fill="#F2290D" />
+                  <path d="M18 12H20V24H18V12Z" fill="#F2290D" />
+                  <path
+                    d="M4 6V8H6V28C6 28.5304 6.21071 29.0391 6.58579 29.4142C6.96086 29.7893 7.46957 30 8 30H24C24.5304 30 25.0391 29.7893 25.4142 29.4142C25.7893 29.0391 26 28.5304 26 28V8H28V6H4ZM8 28V8H24V28H8Z"
+                    fill="#F2290D"
+                  />
+                  <path d="M12 2H20V4H12V2Z" fill="#F2290D" />
+                </svg>
+              </button>
             </div>
-          </div>
-          <div class="item__del">
-            <button class="del-btn">delete</button>
           </div>
         </li>
         <li class="items__item item">
           <div class="item__desc">
-            <input type="checkbox" name="" id="" class="item__status" />
-            <p class="item__name">Bread</p>
+            <label class="item__label">
+              <input type="checkbox" class="item__status" />
+              <span class="item__name"> Bread </span>
+            </label>
             <div class="item__quantity quantity">
-              <button class="quantity__minus">-</button>
+              <button class="quantity__minus">
+                <svg
+                  width="16"
+                  height="2"
+                  viewBox="0 0 16 2"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M15 1H1"
+                    stroke="#333333"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </button>
               <input
                 class="quantity__number"
                 type="number"
                 name="item-quantity"
+                value="1"
               />
-              <button class="quantity__plus">+</button>
+              <button class="quantity__plus">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M8 15V8M8 8V1M8 8H15M8 8H1"
+                    stroke="#333333"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </button>
+              <button class="quantity__del-btn">
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 32 32"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M12 12H14V24H12V12Z" fill="#F2290D" />
+                  <path d="M18 12H20V24H18V12Z" fill="#F2290D" />
+                  <path
+                    d="M4 6V8H6V28C6 28.5304 6.21071 29.0391 6.58579 29.4142C6.96086 29.7893 7.46957 30 8 30H24C24.5304 30 25.0391 29.7893 25.4142 29.4142C25.7893 29.0391 26 28.5304 26 28V8H28V6H4ZM8 28V8H24V28H8Z"
+                    fill="#F2290D"
+                  />
+                  <path d="M12 2H20V4H12V2Z" fill="#F2290D" />
+                </svg>
+              </button>
             </div>
-          </div>
-          <div class="item__del">
-            <button class="del-btn">delete</button>
           </div>
         </li>
         <li class="items__item item">
           <div class="item__desc">
-            <input type="checkbox" name="" id="" class="item__status" />
-            <p class="item__name">Apple</p>
+            <label class="item__label">
+              <input type="checkbox" class="item__status" />
+              <span class="item__name"> Apple </span>
+            </label>
             <div class="item__quantity quantity">
-              <button class="quantity__minus">-</button>
+              <button class="quantity__minus">
+                <svg
+                  width="16"
+                  height="2"
+                  viewBox="0 0 16 2"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M15 1H1"
+                    stroke="#333333"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </button>
               <input
                 class="quantity__number"
                 type="number"
                 name="item-quantity"
+                value="1"
               />
-              <button class="quantity__plus">+</button>
+              <button class="quantity__plus">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M8 15V8M8 8V1M8 8H15M8 8H1"
+                    stroke="#333333"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </button>
+              <button class="quantity__del-btn">
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 32 32"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M12 12H14V24H12V12Z" fill="#F2290D" />
+                  <path d="M18 12H20V24H18V12Z" fill="#F2290D" />
+                  <path
+                    d="M4 6V8H6V28C6 28.5304 6.21071 29.0391 6.58579 29.4142C6.96086 29.7893 7.46957 30 8 30H24C24.5304 30 25.0391 29.7893 25.4142 29.4142C25.7893 29.0391 26 28.5304 26 28V8H28V6H4ZM8 28V8H24V28H8Z"
+                    fill="#F2290D"
+                  />
+                  <path d="M12 2H20V4H12V2Z" fill="#F2290D" />
+                </svg>
+              </button>
             </div>
-          </div>
-          <div class="item__del">
-            <button class="del-btn">delete</button>
           </div>
         </li>
         <li class="items__item item">
           <div class="item__desc">
-            <input type="checkbox" name="" id="" class="item__status" />
-            <p class="item__name">Avocado</p>
+            <label class="item__label">
+              <input type="checkbox" class="item__status" />
+              <span class="item__name"> Avocado </span>
+            </label>
             <div class="item__quantity quantity">
-              <button class="quantity__minus">-</button>
+              <button class="quantity__minus">
+                <svg
+                  width="16"
+                  height="2"
+                  viewBox="0 0 16 2"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M15 1H1"
+                    stroke="#333333"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </button>
               <input
                 class="quantity__number"
                 type="number"
                 name="item-quantity"
+                value="1"
               />
-              <button class="quantity__plus">+</button>
+              <button class="quantity__plus">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M8 15V8M8 8V1M8 8H15M8 8H1"
+                    stroke="#333333"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </button>
+              <button class="quantity__del-btn">
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 32 32"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M12 12H14V24H12V12Z" fill="#F2290D" />
+                  <path d="M18 12H20V24H18V12Z" fill="#F2290D" />
+                  <path
+                    d="M4 6V8H6V28C6 28.5304 6.21071 29.0391 6.58579 29.4142C6.96086 29.7893 7.46957 30 8 30H24C24.5304 30 25.0391 29.7893 25.4142 29.4142C25.7893 29.0391 26 28.5304 26 28V8H28V6H4ZM8 28V8H24V28H8Z"
+                    fill="#F2290D"
+                  />
+                  <path d="M12 2H20V4H12V2Z" fill="#F2290D" />
+                </svg>
+              </button>
             </div>
-          </div>
-          <div class="item__del">
-            <button class="del-btn">delete</button>
           </div>
         </li>
         <li class="items__item item">
           <div class="item__desc">
-            <input type="checkbox" name="" id="" class="item__status" />
-            <p class="item__name">Greek Yogurt</p>
+            <label class="item__label">
+              <input type="checkbox" class="item__status" />
+              <span class="item__name"> Greek Yogurt </span>
+            </label>
             <div class="item__quantity quantity">
-              <button class="quantity__minus">-</button>
+              <button class="quantity__minus">
+                <svg
+                  width="16"
+                  height="2"
+                  viewBox="0 0 16 2"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M15 1H1"
+                    stroke="#333333"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </button>
               <input
                 class="quantity__number"
                 type="number"
                 name="item-quantity"
+                value="1"
               />
-              <button class="quantity__plus">+</button>
+              <button class="quantity__plus">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M8 15V8M8 8V1M8 8H15M8 8H1"
+                    stroke="#333333"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </button>
+              <button class="quantity__del-btn">
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 32 32"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M12 12H14V24H12V12Z" fill="#F2290D" />
+                  <path d="M18 12H20V24H18V12Z" fill="#F2290D" />
+                  <path
+                    d="M4 6V8H6V28C6 28.5304 6.21071 29.0391 6.58579 29.4142C6.96086 29.7893 7.46957 30 8 30H24C24.5304 30 25.0391 29.7893 25.4142 29.4142C25.7893 29.0391 26 28.5304 26 28V8H28V6H4ZM8 28V8H24V28H8Z"
+                    fill="#F2290D"
+                  />
+                  <path d="M12 2H20V4H12V2Z" fill="#F2290D" />
+                </svg>
+              </button>
             </div>
-          </div>
-          <div class="item__del">
-            <button class="del-btn">delete</button>
           </div>
         </li>
       </ul>

@@ -41,3 +41,21 @@ function logout() {
     })
     .catch((error) => {});
 }
+
+function signin() {
+  var email = document.getElementById("signin_email").value;
+  var password = document.getElementById("signin_password").value;
+  firebase
+    .auth()
+    .createUserWithEmailAndPassword(email, password)
+    .then((userCredential) => {
+      // Signed in
+      var user = userCredential.user;
+      // ...
+    })
+    .catch((error) => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      window.alert("Error: " + errorMessage);
+    });
+}

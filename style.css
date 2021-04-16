@@ -76,3 +76,26 @@ body {
 .items {
   margin-top: 77px;
 }
+
+/* ######### login.html css* ########*/
+
+.login {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  display: none;
+}
+
+.user {
+  display: none;
+  margin: 200px auto;
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  background-color: #171717;
+  padding: 50px;
+  color: #e7e7e7;
+}
+
+/* ######### login.html css* ########*/

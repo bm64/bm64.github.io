@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <title>TodoApp | shopping list</title>
+</head>
+<body>
+    <div class="login" id="login_div">
+        <h1>Zaloguj się</h1>
+        <input placeholder="email" type="email" id="email_field" />
+        <input placeholder="password" type="password" id="password_field" />
+        <button onClick="login()">Zaloguj</butotn>
+
+    </div>
+    <div class="user" id="user_div">
+        <h1>Użytkownik</h1>
+        <p id="user_details"></p>
+        <button onClick="logout()">Wyloguj</button>
+    </div>
+
+
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-auth.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+            apiKey: "AIzaSyAwIKdRbH4N4Fs1YdlycqNDMj5l7gOVdk4",
+            authDomain: "todologin-50b18.firebaseapp.com",
+            projectId: "todologin-50b18",
+            storageBucket: "todologin-50b18.appspot.com",
+            messagingSenderId: "103493385629",
+            appId: "1:103493385629:web:6be0a00aed8af4ddc9c374",
+            measurementId: "G-48WQCQSCXJ"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+    </script>
+    <script src="login.js"></script>
+</body>
+
+</html>

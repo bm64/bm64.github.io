@@ -23,7 +23,7 @@ input[type="number"] {
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  background-color: white;
+  background-color: #fff;
 }
 .header {
   background-color: #333;
@@ -178,7 +178,7 @@ input[type="number"] {
 .items__add {
   display: flex;
   width: 100%;
-  margin: 0 auto;
+  margin: 0.5rem auto;
   background-color: #e8e8e8;
   border-radius: calc(1.2rem * 1.5);
 }
@@ -207,6 +207,19 @@ input[type="number"] {
     display: inline-block;
   }
 }
+.countdown-form__submit {
+  display: block;
+  padding: 0.6rem 2rem;
+  font-size: 1.2rem;
+  margin: 0 auto;
+  font-family: "Roboto", sans-serif;
+  color: white;
+  background-color: #6e6e6e;
+  border: none;
+  border-radius: calc(1em + 0.6rem);
+  outline: none;
+  cursor: pointer;
+}
 .items__name {
   font-size: 0.8rem;
   text-transform: lowercase;
@@ -221,7 +234,14 @@ input[type="number"] {
     margin: 2rem;
   }
 }
-.tasks-list__desc {
+.countdown {
+  margin-top: 2rem;
+  background-color: #f7f4f4;
+  border-bottom-left-radius: 1em;
+  border-bottom-right-radius: 1em;
+}
+.tasks-list__desc,
+.countdown__desc {
   display: flex;
   background-color: #3bdcb5;
   justify-content: space-between;
@@ -229,15 +249,30 @@ input[type="number"] {
   padding: 0.7rem 1rem;
   margin: 1rem 0;
 }
-.tasks-list__name {
+.countdown__desc {
+  margin: 0;
+  justify-content: flex-start;
+  text-transform: uppercase;
+}
+.countdown__desc:before {
+  content: "";
+  width: 30px;
+  margin-right: auto;
+}
+.tasks-list__name,
+.countdown__name {
   margin: 0;
   font-weight: 400;
   color: #fff;
 }
-.tasks-list__option {
+.tasks-list__option,
+.countdown__option {
   background: none;
   border: none;
   cursor: pointer;
+}
+.countdown__option {
+  margin-left: auto;
 }
 .items__list {
   list-style: none;
@@ -325,4 +360,18 @@ input[type="number"] {
 }
 .item__option-btn:hover svg path {
   fill: #3bdcb5;
+}
+.countdown__text {
+  text-align: center;
+  margin: 1rem;
+}
+.countdown__time {
+  text-align: center;
+  font-size: 2rem;
+  padding-bottom: 2rem;
+  color: #3bdcb5;
+  font-weight: bold;
+}
+.countdown__time > * {
+  margin: 0.2em;
 }

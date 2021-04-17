@@ -144,13 +144,31 @@
       </header>
 
       <section class="items">
-        <input
-          class="items__add"
-          type="text"
-          name="add-item"
-          id=""
-          placeholder="Add item..."
-        />
+        <div class="items__add">
+          <input
+            class="items__add-label"
+            type="text"
+            name="add-item"
+            id=""
+            placeholder="Add item..."
+          />
+          <button class="items__add-btn">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M8 15V8M8 8V1M8 8H15M8 8H1"
+                stroke="#333333"
+                stroke-width="1"
+                stroke-linecap="round"
+              />
+            </svg>
+          </button>
+        </div>
         <h2 class="items__name">Products:</h2>
         <ul class="items__list">
           <li class="items__item item">
@@ -481,5 +499,6 @@
         </ul>
       </section>
     </div>
+    <script src="./main.js"></script>
   </body>
 </html>

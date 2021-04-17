@@ -22,7 +22,6 @@ input[type="number"] {
 }
 .container {
   max-width: 1200px;
-  min-height: calc(100vh - 77px);
   margin: 0 auto;
   background-color: white;
 }
@@ -174,17 +173,42 @@ input[type="number"] {
   margin-top: 77px;
   padding: 1rem;
   width: clamp(280px, 100vw, 660px);
+  min-height: calc(100vh - 77px);
 }
 .items__add {
-  display: block;
+  display: flex;
+  width: 100%;
   margin: 0 auto;
-  padding: 1em;
-  width: 95%;
-  font-family: "Roboto", sans-serif;
-  font-size: 1.2rem;
   background-color: #e8e8e8;
+  border-radius: calc(1.2rem * 1.5);
+}
+.items__add-label {
+  flex-grow: 1;
+  background-color: transparent;
+  font-family: "Roboto", sans-serif;
   border: none;
-  border-radius: 1.5em; /*1em + padding*/
+  font-size: 1.2rem;
+  outline: none;
+  padding: 0.6em;
+}
+.items__add-btn {
+  display: none;
+  border: none;
+  background: none;
+  padding: 0 1.2rem;
+  cursor: pointer;
+  outline: none;
+}
+@media (min-width: 380px) {
+  .items__add {
+    width: 95%;
+  }
+  .items__add-label {
+    padding: 1em;
+  }
+  .items__add-btn {
+    display: inline-block;
+  }
 }
 .items__name {
   font-size: 0.8rem;
@@ -264,6 +288,8 @@ input[type="number"] {
   border: none;
   display: flex;
   align-items: center;
+  cursor: pointer;
+  outline: none;
 }
 .quantity__minus svg,
 .quantity__plus svg {

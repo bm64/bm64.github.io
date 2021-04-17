@@ -200,9 +200,6 @@ input[type="number"] {
   outline: none;
 }
 @media (min-width: 380px) {
-  .items__add {
-    width: 95%;
-  }
   .items__add-label {
     padding: 1em;
   }
@@ -217,17 +214,35 @@ input[type="number"] {
 }
 @media (min-width: 800px) {
   .items__add {
-    margin: 2rem;
+    margin: 2rem auto;
   }
   .items__name {
     text-align: center;
     margin: 2rem;
   }
 }
+.tasks-list__desc {
+  display: flex;
+  background-color: #3bdcb5;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.7rem 1rem;
+  margin: 1rem 0;
+}
+.tasks-list__name {
+  margin: 0;
+  font-weight: 400;
+  color: #fff;
+}
+.tasks-list__option {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
 .items__list {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 1rem 0;
 }
 .items__item {
   padding: 0.5em 0;
@@ -270,6 +285,9 @@ input[type="number"] {
   display: flex;
   justify-content: center;
 }
+.item__option {
+  margin-right: 1em;
+}
 .quantity__number {
   width: 2em;
   height: 2em;
@@ -283,7 +301,8 @@ input[type="number"] {
 }
 .quantity__minus,
 .quantity__plus,
-.quantity__del-btn {
+.quantity__del-btn,
+.item__option-btn {
   background: transparent;
   border: none;
   display: flex;
@@ -300,4 +319,10 @@ input[type="number"] {
   height: 1.5rem;
   width: auto;
   margin-left: 0.5rem;
+}
+.item__option-btn svg path {
+  fill: #6e6e6e;
+}
+.item__option-btn:hover svg path {
+  fill: #3bdcb5;
 }

@@ -93,3 +93,34 @@ function handleAddItem() {
 }
 
 handleAddItem();
+
+const hideOptions = () => {
+  document.querySelectorAll(".option-btn--active").forEach(btn => {
+    btn.classList.remove("option-btn--active");
+  });
+};
+
+function handleShowOptions() {
+  const itemsOptions = document.querySelectorAll(".item__option");
+
+  const showOptions = btn => {
+    hideOptions();
+    btn.classList.add("option-btn--active");
+  };
+
+  itemsOptions.forEach(item => {
+    const btn = item.querySelector(".option-btn");
+    btn.removeEventListener("click", e => showOptions(btn));
+    btn.addEventListener("click", e => showOptions(btn));
+  });
+}
+handleShowOptions();
+
+function handleOutsideOptionsClick() {
+  window.addEventListener("click", e => {
+    if (e.target.closest(".item__option") === null) {
+      hideOptions();
+    }
+  });
+}
+handleOutsideOptionsClick();

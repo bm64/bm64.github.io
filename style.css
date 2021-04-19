@@ -30,6 +30,7 @@ input[type="number"] {
   display: flex;
   justify-content: space-between;
   position: fixed;
+  z-index: 2;
   top: 0;
   height: 77px;
   width: 1200px; /*max container width -> position fixed is tricky*/
@@ -171,7 +172,7 @@ input[type="number"] {
 .items {
   margin: auto;
   margin-top: 77px;
-  padding: 1rem;
+  padding: 1rem 0;
   width: clamp(280px, 100vw, 660px);
   min-height: calc(100vh - 77px);
 }
@@ -200,6 +201,9 @@ input[type="number"] {
   outline: none;
 }
 @media (min-width: 380px) {
+  .items {
+    padding: 1rem;
+  }
   .items__add-label {
     padding: 1em;
   }
@@ -265,11 +269,13 @@ input[type="number"] {
   font-weight: 400;
   color: #fff;
 }
-.tasks-list__option,
-.countdown__option {
+.option-btn {
   background: none;
   border: none;
   cursor: pointer;
+}
+.tasks-list__option {
+  margin-right: -1em;
 }
 .countdown__option {
   margin-left: auto;
@@ -280,7 +286,7 @@ input[type="number"] {
   margin: 1rem 0;
 }
 .items__item {
-  padding: 0.5em 0;
+  padding: 0.5em 1em;
   border-bottom: 1px solid #6e6e6e60;
 }
 .items__item:nth-of-type(1) {
@@ -321,7 +327,7 @@ input[type="number"] {
   justify-content: center;
 }
 .item__option {
-  margin-right: 1em;
+  position: relative;
 }
 .quantity__number {
   width: 2em;
@@ -358,7 +364,8 @@ input[type="number"] {
 .item__option-btn svg path {
   fill: #6e6e6e;
 }
-.item__option-btn:hover svg path {
+.item__option-btn:hover svg path,
+.option-btn--active svg path {
   fill: #3bdcb5;
 }
 .countdown__text {
@@ -374,4 +381,53 @@ input[type="number"] {
 }
 .countdown__time > * {
   margin: 0.2em;
+}
+
+.options {
+  visibility: hidden;
+  width: 100vw;
+  background-color: #333;
+  color: white;
+  list-style: none;
+  padding: 5px 0;
+  border-radius: 0;
+
+  margin: 0;
+
+  position: absolute;
+  z-index: 2;
+  top: calc(100% + 0.5em); /*item padding*/
+  right: -1rem;
+}
+.tasks-list__option + .options {
+  right: -1em;
+}
+@media (min-width: 380px) {
+  .options {
+    border-radius: 1em;
+    width: 330px;
+    right: 0;
+  }
+}
+.option-btn--active + .options {
+  visibility: visible;
+}
+.option {
+  border-bottom: 1px solid #f2f2f2;
+}
+.option:last-of-type {
+  border-bottom: none;
+}
+.option > * {
+  border: none;
+  background: none;
+  color: #fff;
+  width: 100%;
+  padding: 1em 2em;
+  text-align: left;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.option:hover > * {
+  color: #3bdcb5;
 }

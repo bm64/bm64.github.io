@@ -94,8 +94,11 @@ function handleShowOptions() {
   const itemsOptions = document.querySelectorAll(".item__option");
 
   const showOptions = btn => {
+    const btnActive = btn.classList.contains("option-btn--active");
     hideOptions();
-    btn.classList.add("option-btn--active");
+    if (!btnActive) {
+      btn.classList.add("option-btn--active");
+    }
   };
 
   itemsOptions.forEach(item => {
@@ -153,6 +156,26 @@ const products = [
   { name: "Avocado", quantity: 3 },
   { name: "Greek Yogurt", quantity: 21 },
 ];
+const tasks = [
+  {
+    listName: "Home",
+    tasks: [
+      { name: "Ironing", id: "1" },
+      { name: "Wash dishes", id: "2" },
+      { name: "Fix the radio", id: "3" },
+      { name: "Call cousine", id: "4" },
+      { name: "Singing in the shower", id: "5" },
+    ],
+  },
+  {
+    listName: "Work",
+    tasks: [{ name: "Finish todo app", id: "99" }],
+  },
+];
+const countdowns = [
+  { name: "Birthday day!", date: "12-02-2022" },
+  { name: "Trip to LA!", date: "21-05-2023" },
+];
 
 function showProducts() {
   const itemList = document.querySelector(".products");
@@ -183,22 +206,6 @@ function showProducts() {
   handleQuantityChange();
   handleCheckboxChange();
 }
-const tasks = [
-  {
-    listName: "Home",
-    tasks: [
-      { name: "Ironing", id: "1" },
-      { name: "Wash dishes", id: "2" },
-      { name: "Fix the radio", id: "3" },
-      { name: "Call cousine", id: "4" },
-      { name: "Singing in the shower", id: "5" },
-    ],
-  },
-  {
-    listName: "Work",
-    tasks: [{ name: "Finish todo app", id: "99" }],
-  },
-];
 function showTasks() {
   const taskList = document.querySelector(".tasks-lists");
   if (taskList === null) {
@@ -274,10 +281,6 @@ function showTasks() {
   handleShowOptions();
   handleCheckboxChange();
 }
-const countdowns = [
-  { name: "Birthday day!", date: "12-02-2022" },
-  { name: "Trip to LA!", date: "21-05-2023" },
-];
 
 function showCountdowns() {
   const countdownList = document.querySelector(".countdowns");
@@ -323,6 +326,7 @@ function showCountdowns() {
   handleOutsideOptionsClick();
   handleShowOptions();
 }
+
 function init() {
   handleHamburgerMenu();
   handleAddItem();

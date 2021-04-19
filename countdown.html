@@ -10,12 +10,12 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
-    <title>TodoApp | shopping list</title>
+    <title>TodoApp | Countdown</title>
   </head>
   <body>
     <div class="container">
       <header class="header">
-        <h1 class="header__title header__title--mobile">Shopping list</h1>
+        <h1 class="header__title header__title--mobile">Countdown</h1>
         <h1 class="header__title header__title--desktop">
           <span class="app__logo"
             ><svg
@@ -95,10 +95,7 @@
               >
             </li>
             <li class="menu__item">
-              <a
-                href="/shopping-list.html"
-                class="menu__link menu__link--active"
-              >
+              <a href="/shopping-list.html" class="menu__link">
                 <span class="menu__icon">
                   <svg
                     width="50"
@@ -117,7 +114,7 @@
               </a>
             </li>
             <li class="menu__item">
-              <a href="countdown.html" class="menu__link"
+              <a href="countdown.html" class="menu__link menu__link--active"
                 ><span class="menu__icon"
                   ><svg
                     width="55"
@@ -143,35 +140,91 @@
         </nav>
       </header>
 
-      <section class="items">
-        <div class="items__add">
-          <input
-            class="items__add-label"
-            type="text"
-            name="add-item"
-            id=""
-            placeholder="Add item..."
-          />
-          <button class="items__add-btn">
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 16 16"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M8 15V8M8 8V1M8 8H15M8 8H1"
-                stroke="#333333"
-                stroke-width="1"
-                stroke-linecap="round"
-              />
-            </svg>
-          </button>
-        </div>
-        <h2 class="items__name">Products:</h2>
-        <ul class="items__list products"></ul>
-      </section>
+      <main class="items">
+        <form class="countdown-form">
+          <div class="items__add">
+            <input
+              class="items__add-label"
+              type="text"
+              name="add-item"
+              id=""
+              placeholder="Create new list..."
+            />
+            <button class="items__add-btn">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 16 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M8 15V8M8 8V1M8 8H15M8 8H1"
+                  stroke="#333333"
+                  stroke-width="1"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </button>
+          </div>
+          <div class="items__add">
+            <input
+              class="items__add-label"
+              type="text"
+              name="add-item"
+              id=""
+              placeholder="Set date..."
+            />
+            <button class="items__add-btn">
+              <svg
+                width="40"
+                height="40"
+                viewBox="0 0 40 40"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16.1125 29.22V15.885H14.53C13.3966 16.4892 12.3012 17.1621 11.25 17.9V19.6375C12.1875 18.995 13.6725 18.0875 14.395 17.695H14.425V29.22H16.1125ZM19.0825 25.9575C19.2 27.5575 20.5675 29.4725 23.34 29.4725C26.485 29.4725 28.34 26.8075 28.34 22.295C28.34 17.46 26.3875 15.625 23.4575 15.625C21.1425 15.625 18.965 17.305 18.965 20.1475C18.965 23.0475 21.025 24.5725 23.155 24.5725C25.02 24.5725 26.23 23.6325 26.6125 22.5975H26.68C26.67 25.8875 25.5275 28.0075 23.4175 28.0075C21.7575 28.0075 20.8975 26.8825 20.7925 25.9575H19.0825ZM26.465 20.165C26.465 21.905 25.0675 23.115 23.505 23.115C22.0025 23.115 20.645 22.1575 20.645 20.115C20.645 18.0575 22.1 17.09 23.565 17.09C25.1475 17.09 26.465 18.085 26.465 20.165Z"
+                  fill="#6E6E6E"
+                />
+                <path
+                  d="M8.75 0C9.08152 0 9.39946 0.131696 9.63388 0.366117C9.8683 0.600537 10 0.918479 10 1.25V2.5H30V1.25C30 0.918479 30.1317 0.600537 30.3661 0.366117C30.6005 0.131696 30.9185 0 31.25 0C31.5815 0 31.8995 0.131696 32.1339 0.366117C32.3683 0.600537 32.5 0.918479 32.5 1.25V2.5H35C36.3261 2.5 37.5979 3.02678 38.5355 3.96447C39.4732 4.90215 40 6.17392 40 7.5V35C40 36.3261 39.4732 37.5979 38.5355 38.5355C37.5979 39.4732 36.3261 40 35 40H5C3.67392 40 2.40215 39.4732 1.46447 38.5355C0.526784 37.5979 0 36.3261 0 35V7.5C0 6.17392 0.526784 4.90215 1.46447 3.96447C2.40215 3.02678 3.67392 2.5 5 2.5H7.5V1.25C7.5 0.918479 7.6317 0.600537 7.86612 0.366117C8.10054 0.131696 8.41848 0 8.75 0V0ZM2.5 10V35C2.5 35.663 2.76339 36.2989 3.23223 36.7678C3.70107 37.2366 4.33696 37.5 5 37.5H35C35.663 37.5 36.2989 37.2366 36.7678 36.7678C37.2366 36.2989 37.5 35.663 37.5 35V10H2.5Z"
+                  fill="#6E6E6E"
+                />
+              </svg>
+            </button>
+          </div>
+          <div class="items__add">
+            <input
+              class="items__add-label"
+              type="text"
+              name="add-item"
+              id=""
+              placeholder="Set time..."
+            />
+            <button class="items__add-btn">
+              <svg
+                width="40"
+                height="40"
+                viewBox="0 0 40 40"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M20 37.5C16.5388 37.5 13.1554 36.4737 10.2775 34.5507C7.39967 32.6278 5.15665 29.8947 3.83212 26.697C2.50758 23.4993 2.16102 19.9806 2.83627 16.5859C3.51151 13.1913 5.17822 10.0731 7.62564 7.62564C10.0731 5.17822 13.1913 3.51151 16.5859 2.83627C19.9806 2.16102 23.4993 2.50758 26.697 3.83212C29.8947 5.15665 32.6278 7.39967 34.5507 10.2775C36.4737 13.1554 37.5 16.5388 37.5 20C37.5 24.6413 35.6563 29.0925 32.3744 32.3744C29.0925 35.6563 24.6413 37.5 20 37.5ZM20 5.00001C17.0333 5.00001 14.1332 5.87974 11.6665 7.52796C9.19972 9.17618 7.27713 11.5189 6.14181 14.2598C5.0065 17.0006 4.70945 20.0166 5.28823 22.9264C5.86701 25.8361 7.29562 28.5088 9.39341 30.6066C11.4912 32.7044 14.1639 34.133 17.0737 34.7118C19.9834 35.2906 22.9994 34.9935 25.7403 33.8582C28.4811 32.7229 30.8238 30.8003 32.472 28.3336C34.1203 25.8668 35 22.9667 35 20C35 16.0218 33.4197 12.2065 30.6066 9.39341C27.7936 6.58036 23.9783 5.00001 20 5.00001Z"
+                  fill="#6E6E6E"
+                />
+                <path
+                  d="M25.7375 27.5L18.75 20.5125V8.75H21.25V19.475L27.5 25.7375L25.7375 27.5Z"
+                  fill="#6E6E6E"
+                />
+              </svg>
+            </button>
+          </div>
+          <input type="submit" value="Start!" class="countdown-form__submit" />
+        </form>
+        <div class="countdowns"></div>
+      </main>
     </div>
     <script src="./main.js"></script>
   </body>

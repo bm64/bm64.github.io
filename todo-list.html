@@ -10,12 +10,12 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
-    <title>TodoApp | shopping list</title>
+    <title>TodoApp | ToDo List</title>
   </head>
   <body>
     <div class="container">
       <header class="header">
-        <h1 class="header__title header__title--mobile">Shopping list</h1>
+        <h1 class="header__title header__title--mobile">ToDo list</h1>
         <h1 class="header__title header__title--desktop">
           <span class="app__logo"
             ><svg
@@ -76,7 +76,7 @@
               </a>
             </li>
             <li class="menu__item">
-              <a href="todo-list.html" class="menu__link"
+              <a href="todo-list.html" class="menu__link menu__link--active"
                 ><span class="menu__icon"
                   ><svg
                     width="48"
@@ -95,10 +95,7 @@
               >
             </li>
             <li class="menu__item">
-              <a
-                href="/shopping-list.html"
-                class="menu__link menu__link--active"
-              >
+              <a href="/shopping-list.html" class="menu__link">
                 <span class="menu__icon">
                   <svg
                     width="50"
@@ -143,14 +140,14 @@
         </nav>
       </header>
 
-      <section class="items">
+      <main class="items">
         <div class="items__add">
           <input
             class="items__add-label"
             type="text"
             name="add-item"
             id=""
-            placeholder="Add item..."
+            placeholder="Create new list..."
           />
           <button class="items__add-btn">
             <svg
@@ -169,9 +166,8 @@
             </svg>
           </button>
         </div>
-        <h2 class="items__name">Products:</h2>
-        <ul class="items__list products"></ul>
-      </section>
+        <div class="tasks-lists"></div>
+      </main>
     </div>
     <script src="./main.js"></script>
   </body>

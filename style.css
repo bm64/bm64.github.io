@@ -14,7 +14,6 @@ input[type="number"]::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
-
 *,
 *::before,
 *::after {
@@ -61,7 +60,6 @@ input[type="number"] {
 .header__title.header__title--desktop::before {
   display: none;
 }
-
 .app__logo svg {
   height: 50px;
   width: auto;
@@ -434,6 +432,35 @@ input[type="number"] {
 
 /* ######### login.html css* ########*/
 
+.avatar {
+  margin-top: 77px;
+  padding: 2.5rem;
+}
+
+.avatar__img {
+  display: block;
+  margin: 0 auto;
+  width: 180px;
+}
+
+.signin {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.signin__header {
+  width: 100%;
+  color: #333333;
+  font-size: 1.5rem;
+  padding: 1rem;
+  background-color: #3bdcb5;
+  text-align: center;
+  font-weight: normal;
+}
+
 .login {
   margin: auto;
   display: flex;
@@ -441,7 +468,7 @@ input[type="number"] {
   max-width: 400px;
   display: none;
 }
-.sign_in {
+.signup {
   margin: auto;
   display: flex;
   flex-direction: column;

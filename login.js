@@ -1,3 +1,5 @@
+const db = firebase.firestore();
+
 firebase.auth().onAuthStateChanged(function (user) {
   if (user) {
     document.getElementById("login_div").style.display = "none";
@@ -42,17 +44,43 @@ function logout() {
     .catch((error) => {});
 }
 
-function signin() {
-  var email = document.getElementById("signin_email").value;
-  var password = document.getElementById("signin_password").value;
+function signup() {
+  const email = document.getElementById("signin_email").value;
+  const password = document.getElementById("signin_password").value;
   firebase
     .auth()
     .createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
       // Signed in
-      var user = userCredential.user;
-      // ...
+      const user = userCredential.user;
+      const userUid = user.uid;
+      console.log(userUid);
+      /*
+      db.collection("users")
+        .doc(userUid)
+        .collection("shoppingList")
+        .doc("item")
+        .set(
+          {
+            quantity: 0,
+            collected: false,
+          },
+          { merge: true }
+        );
+      db.collection("users")
+        .doc(userUid)
+        .collection("todoLists")
+        .doc("list1")
+        .set(
+          {
+            gotowanie: { completionDate: 27 / 01 / 1998, completed: false },
+          },
+          { merge: true }
+        );
+       */
+      db.collection("users").doc(userUid).set({});
     })
+
     .catch((error) => {
       var errorCode = error.code;
       var errorMessage = error.message;

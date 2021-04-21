@@ -1,20 +1,11 @@
 const db = firebase.firestore();
 console.log(window.location.pathname);
 
-firebase.auth().onAuthStateChanged(function (user) {
-  if (user) {
-    //window.location = "/user";
-  } else {
-    // No user is signed in.
-  }
-});
-
 const handleViewChange = () => {
   const signInView = document.querySelector(".login");
   const signUpView = document.querySelector(".signup");
   const goToSignup = document.querySelector(".goToSignup");
   const goToSignin = document.querySelector(".goToSignin");
-  console.log(goToSignin);
   goToSignin.addEventListener("click", (e) => {
     signInView.style.display = "flex";
     signUpView.style.display = "none";
@@ -101,30 +92,22 @@ firebase
 
       // This gives you a Google Access Token. You can use it to access the Google API.
       var token = credential.accessToken;
-      /*
+
+      const userUid = result.user.uid;
+      console.log(userUid);
       db.collection("users")
         .doc(userUid)
         .set({})
         .then(() => {
           window.location = "/user";
         });
-        */
     }
     // The signed-in user info.
-    const userUid = result.user.uid;
-    console.log(userUid);
-    db.collection("users")
-      .doc(userUid)
-      .set({})
-      .then(() => {
-        window.location = "/user";
-      });
   })
   .catch((error) => {
     // Handle Errors here.
     var errorCode = error.code;
     var errorMessage = error.message;
-    window.alert("Error: " + errorMessage);
     // The email of the user's account used.
     var email = error.email;
     // The firebase.auth.AuthCredential type that was used.

@@ -300,7 +300,9 @@ function showCountdowns() {
   const options = `
   <ul class="options">
     <li class="option">
-      <button class="option__rename">Rename event...</button>
+      <button 
+      onClick="showModal()" 
+      class="option__rename">Rename event...</button>
     </li>
     <li class="option">
       <button class="option__change-date">Change date...</button>
@@ -372,3 +374,16 @@ function addChleb() {
     });
 }
 init();
+
+/////////////////////////////////////
+///////////modal/////////////////////
+/////////////////////////////////////
+
+const showModal = () => {
+  const modal = document.querySelector(".modal");
+  modal.style.display = "block";
+};
+const hideModal = () => {
+  const modal = document.querySelector(".modal");
+  modal.style.display = "none";
+};

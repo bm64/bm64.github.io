@@ -174,6 +174,12 @@ input[type="number"] {
   width: clamp(280px, 100vw, 660px);
   min-height: calc(100vh - 77px);
 }
+.items.items--nostyle {
+  padding: 0;
+  margin: 0;
+  width: 100vw;
+  background-color: #f2f2f2;
+}
 .items__add {
   display: flex;
   width: 100%;

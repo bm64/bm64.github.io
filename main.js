@@ -552,8 +552,6 @@ function init() {
 ///////////Firestore//////////////////////
 //////////////////////////////////////////
 
-init();
-
 function getData() {
   const db = firebase.firestore();
   const userRef = db.collection("users").doc(currentUser.uid);

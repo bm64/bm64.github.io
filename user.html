@@ -15,7 +15,7 @@
   <body>
     <div class="container">
       <header class="header">
-        <h1 class="header__title header__title--mobile">ToDo list</h1>
+        <h1 class="header__title header__title--mobile">User profile</h1>
         <h1 class="header__title header__title--desktop">
           <span class="app__logo"
             ><svg
@@ -54,7 +54,7 @@
           </button>
           <ul class="menu__items">
             <li class="menu__item">
-              <a href="#" class="menu__link"
+              <a href="#" class="menu__link menu__link--active"
                 ><span class="menu__icon"
                   ><svg
                     width="48"
@@ -76,7 +76,7 @@
               </a>
             </li>
             <li class="menu__item">
-              <a href="todo-list.html" class="menu__link menu__link--active"
+              <a href="todo-list.html" class="menu__link"
                 ><span class="menu__icon"
                   ><svg
                     width="48"
@@ -139,11 +139,13 @@
           </ul>
         </nav>
       </header>
-      <div class="avatar">
-        <img class="avatar__img" src="./src/avatar.png" />
-      </div>
-      <div class="user">
-        <button class="logout__button" onClick="logout()">Log Out</button>
+      <div class="items items--nostyle">
+        <div class="avatar">
+          <img class="avatar__img" src="./src/avatar.png" />
+        </div>
+        <div class="user">
+          <button class="logout__button" onClick="logout()">Log Out</button>
+        </div>
       </div>
     </div>
     <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
@@ -171,5 +173,6 @@
       firebase.analytics();
     </script>
     <script src="login.js"></script>
+    <script src="main.js"></script>
   </body>
 </html>

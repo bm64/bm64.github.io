@@ -451,6 +451,17 @@ input[type="number"] {
   align-items: center;
 }
 
+.signin__info {
+  font-size: 1rem;
+  color: #6e6e6e;
+  text-align: center;
+  border-bottom: 1px solid rgba(110, 110, 110, 0.6);
+  padding: 1rem;
+  width: 100%;
+  margin: 0px;
+  font-weight: normal;
+}
+
 .signin__header {
   width: 100%;
   color: #333333;
@@ -459,20 +470,77 @@ input[type="number"] {
   background-color: #3bdcb5;
   text-align: center;
   font-weight: normal;
+  margin: 0px;
+}
+
+.signin__input {
+  display: flex;
+  width: 100%;
+  margin: 0.5rem auto;
+  background-color: #e8e8e8;
+  border-radius: calc(1.2rem * 1.5);
+}
+
+.signin__input-label {
+  flex-grow: 1;
+  background-color: transparent;
+  font-family: "Roboto", sans-serif;
+  border: none;
+  font-size: 1rem;
+  outline: none;
+  padding: 1em;
+  text-align: center;
 }
 
 .login {
+  width: 100%;
   margin: auto;
   display: flex;
   flex-direction: column;
+  align-items: center;
   max-width: 400px;
-  display: none;
+  padding: 1rem 2.5rem;
 }
 .signup {
+  width: 100%;
   margin: auto;
   display: flex;
   flex-direction: column;
+  align-items: center;
   max-width: 400px;
+  padding: 1rem 2.5rem;
+}
+
+.login__button {
+  width: 70%;
+  margin: 0.5rem;
+  color: #ffffff;
+  text-align: center;
+  font-size: 1rem;
+  border-radius: calc(1.2rem * 1.5);
+  outline: none;
+  background-color: #3bdcb5;
+  padding: 0.6rem;
+  border: none;
+  cursor: pointer;
+}
+
+.or {
+  color: #3bdcb5;
+  font-size: 0.8rem;
+  text-align: center;
+  margin: 0px;
+}
+
+.signup__text {
+  font-size: 0.8rem;
+  color: #000000;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.signup__text > p {
+  margin: 0.2rem;
 }
 
 .user {
@@ -484,17 +552,6 @@ input[type="number"] {
   background-color: #171717;
   padding: 50px;
   color: #e7e7e7;
-}
-
-.google_login {
-  margin: 50px auto;
-  width: 200px;
-  height: 50px;
-  background-color: #171717;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
 }
 
 /* ######### login.html css* ########*/

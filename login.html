@@ -92,25 +92,31 @@
     </div>
     <div class="signin">
       <h1 class="signin__header">Sign in</h1>
-
+      <h1 class="signin__info">
+        Signing-in is required to identify your data
+      </h1>
       <div class="login" id="login_div">
-        <h1>Zaloguj się</h1>
-        <input placeholder="email" type="email" id="email_field" />
-        <input placeholder="password" type="password" id="password_field" />
-        <button onClick="login()">Zaloguj</butotn>
-
+        <div class="signin__input">
+        <input class="signin__input-label" placeholder="Enter your email" type="email" id="email_field" /></div>
+        <div class="signin__input">
+        <input class="signin__input-label" placeholder="Password" type="password" id="password_field" /></div>
+        <button class="login__button" onClick="login()">Log In</button>
+        <p class="or">OR</p>
+        <button class="login__button" onClick="googleLogin()"
+        style="background-color: #DB4437"
+        >Log In with Google</button>
+        <div class="signup__text">
+        <p>You don’t have an account yet?</p>
+        <p style="color: #3bdcb5; cursor:pointer">Sign up here</p></div>
       </div>
       <div class="signup" id="signin_div">
-        <h1>Zaloz konto</h1>
-        <input placeholder="Podaj email" type="email" id="signin_email" />
-        <input placeholder="Podaj haslo" type="password" id="signin_password" />
-        <button onClick="signup()">Zaloz konto</butotn>
+        <div class="signin__input">
+        <input  class="signin__input-label" placeholder="Enter your email" type="email" id="signin_email" /></div>
+        <div class="signin__input">
+        <input class="signin__input-label"  placeholder="Enter your password" type="password" id="signin_password" /></div>
+        <button class="login__button" onClick="signup()">Zaloz konto</button>
       </div>
 
-      <div class="google_login">
-        <button onClick="googleLogin()">Zaloguj przez google</button>
-
-      </div>
 
       <div class="user" id="user_div">
         <h1>Użytkownik</h1>

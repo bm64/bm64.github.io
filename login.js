@@ -1,6 +1,14 @@
 const db = firebase.firestore();
+console.log(window.location.pathname);
+
+const handleViewChange = () => {
+  if (window.location.pathname === "/login") {
+  } else {
+  }
+};
 
 firebase.auth().onAuthStateChanged(function (user) {
+  /*
   if (user) {
     document.getElementById("login_div").style.display = "none";
     document.getElementById("user_div").style.display = "flex";
@@ -13,6 +21,7 @@ firebase.auth().onAuthStateChanged(function (user) {
     document.getElementById("login_div").style.display = "flex";
     document.getElementById("user_div").style.display = "none";
   }
+  */
 });
 
 function login() {

@@ -165,26 +165,6 @@ const products = [
   { name: "Avocado", quantity: 3 },
   { name: "Greek Yogurt", quantity: 21 },
 ];
-const tasks = [
-  {
-    listName: "Home",
-    tasks: [
-      { name: "Ironing", id: "1" },
-      { name: "Wash dishes", id: "2" },
-      { name: "Fix the radio", id: "3" },
-      { name: "Call cousine", id: "4" },
-      { name: "Singing in the shower", id: "5" },
-    ],
-  },
-  {
-    listName: "Work",
-    tasks: [{ name: "Finish todo app", id: "99" }],
-  },
-];
-const countdowns = [
-  { name: "Birthday day!", date: "12-02-2022" },
-  { name: "Trip to LA!", date: "21-05-2023" },
-];
 
 function showProducts() {
   const itemList = document.querySelector(".products");
@@ -215,8 +195,10 @@ function showProducts() {
   handleQuantityChange();
   handleCheckboxChange();
 }
-function showTasks() {
+
+function showTasks(tasks) {
   const taskList = document.querySelector(".tasks-lists");
+  console.log(tasks);
   if (taskList === null) {
     return;
   }
@@ -244,8 +226,7 @@ function showTasks() {
       <button class="option__delete-todo">Delete list...</button>
     </li>
   </ul>`;
-
-  tasks.forEach(({ listName, tasks: tasksItems }) => {
+  tasks.forEach(({ name: listName, tasks: tasksItems }) => {
     const section = document.createElement("section");
     section.classList = "tasks-list";
     section.dataset.listName = listName;
@@ -262,9 +243,8 @@ function showTasks() {
       </div>
       `;
     const ul = document.createElement("ul");
-
     ul.classList = "items__list";
-    tasksItems.forEach(({ name }) => {
+    tasksItems.forEach(({ taskName: name }) => {
       const li = document.createElement("li");
       li.classList = "items__item item";
       li.dataset.itemName = name;
@@ -287,9 +267,17 @@ function showTasks() {
   handleOutsideOptionsClick();
   handleShowOptions();
   handleCheckboxChange();
-}
 
-function showCountdowns() {
+  handleAddTodo();
+  handleAddTask();
+  handleDeleteTodoList();
+  handleRenameTodoList();
+
+  handleDeleteTask();
+  handleRenameTask();
+  handleChangeTaskDate();
+}
+function showCountdowns(countdowns) {
   const countdownList = document.querySelector(".countdowns");
   if (countdownList === null) {
     return;
@@ -333,6 +321,11 @@ function showCountdowns() {
   }); //end countdowns foreach
   handleOutsideOptionsClick();
   handleShowOptions();
+
+  handleDeleteCountdown();
+  handleRenameCountdown();
+  handleChangeCountdownDate();
+  handleChangeCountdownTime();
 }
 ////////////// TODO LIST HANDLERS /////////////////
 function handleAddTodo() {
@@ -347,11 +340,13 @@ function handleAddTodo() {
     if (e.key === "Enter") {
       addTodoList(input.value);
       input.value = "";
+      getData();
     }
   });
   btn.addEventListener("click", e => {
     addTodoList(input.value);
     input.value = "";
+    getData();
   });
 }
 function handleDeleteTodoList() {
@@ -360,6 +355,7 @@ function handleDeleteTodoList() {
     btn.addEventListener("click", e => {
       const listName = e.target.closest(".tasks-list").dataset.listName;
       deleteTodoList(listName);
+      getData();
     });
   });
 }
@@ -369,6 +365,7 @@ function handleRenameTodoList() {
     btn.addEventListener("click", e => {
       const listName = e.target.closest(".tasks-list").dataset.listName;
       renameTodoList(listName, "newName");
+      getData();
     });
   });
 }
@@ -389,6 +386,7 @@ function handleAddTask() {
         );
         addTask(listName, taskName, nextWeek, false);
         input.value = "";
+        getData();
       }
     });
   });
@@ -401,6 +399,7 @@ function handleDeleteTask() {
       const taskName = e.target.closest(".item").dataset.itemName;
 
       deleteTask(listName, taskName);
+      getData();
     });
   });
 }
@@ -411,6 +410,7 @@ function handleRenameTask() {
       const listName = e.target.closest(".tasks-list").dataset.listName;
       const taskName = e.target.closest(".item").dataset.itemName;
       updateTask(listName, taskName, null, null, "new Name");
+      getData();
     });
   });
 }
@@ -422,6 +422,7 @@ function handleChangeTaskDate() {
       const taskName = e.target.closest(".item").dataset.itemName;
       const newDate = new Date();
       updateTask(listName, taskName, newDate);
+      getData();
     });
   });
 }
@@ -449,6 +450,7 @@ function handleAddCountdown() {
     nameElement.value = "";
     dateElement.value = "";
     timeElement.value = "";
+    getData();
   });
 }
 function handleDeleteCountdown() {
@@ -457,6 +459,7 @@ function handleDeleteCountdown() {
     btn.addEventListener("click", e => {
       const eventName = e.target.closest(".countdown").dataset.eventName;
       deleteCountdown(eventName);
+      getData();
     });
   });
 }
@@ -466,6 +469,7 @@ function handleRenameCountdown() {
     btn.addEventListener("click", e => {
       const eventName = e.target.closest(".countdown").dataset.eventName;
       renameCountdown(eventName, "new Name");
+      getData();
     });
   });
 }
@@ -490,6 +494,7 @@ function handleChangeCountdownDate() {
           date.setSeconds(dateInSeconds);
           date.setFullYear(2021, 2, 3);
           updateCountdownTime(eventName, date);
+          getData();
         });
       }).catch(e => {
         console.log(`an error occured: ${e}`);
@@ -518,6 +523,7 @@ function handleChangeCountdownTime() {
           date.setSeconds(dateInSeconds);
           date.setHours(13, 15);
           updateCountdownTime(eventName, date);
+          getData();
         });
       }).catch(e => {
         console.log(`an error occured: ${e}`);
@@ -527,48 +533,16 @@ function handleChangeCountdownTime() {
 }
 function init() {
   handleHamburgerMenu();
-  // handleAddItem();
   showProducts();
-  showTasks();
-  showCountdowns();
-
-  handleAddTodo();
-  handleAddTask();
-  handleDeleteTodoList();
-  handleRenameTodoList();
-
-  handleDeleteTask();
-  handleRenameTask();
-  handleChangeTaskDate();
+  // showCountdowns();
+  getData();
 
   handleAddCountdown();
-  handleDeleteCountdown();
-  handleRenameCountdown();
-  handleChangeCountdownDate();
-  handleChangeCountdownTime();
 }
 
 //////////////////////////////////////////
 ///////////Firestore//////////////////////
 //////////////////////////////////////////
-
-function getData() {
-  const db = firebase.firestore();
-  const userRef = db.collection("users").doc(currentUser.uid);
-  return userRef
-    .get()
-    .then(doc => {
-      if (doc.exists) {
-        console.log(doc.data());
-        return doc.data();
-      } else {
-        console.log("no data");
-      }
-    })
-    .catch(e => {
-      console.log(`Error getting document: ${e}`);
-    });
-}
 
 /////////////////// Countdowns ////////////////////
 
@@ -581,7 +555,40 @@ function addCountdown(eventName, eventDate) {
     .collection("countdowns");
   countdowns.doc(eventName).set({ eventDate: date });
 }
+function getData() {
+  const db = firebase.firestore();
+  const userRef = db.collection("users").doc(currentUser.uid);
 
+  ///todo lists
+  userRef
+    .collection("todoLists")
+    .get()
+    .then(snapshot => {
+      const list = [];
+      snapshot.forEach(doc => {
+        const tasks = doc.data().tasks || [];
+        const item = { name: doc.id, tasks };
+        list.push(item);
+      });
+      return list;
+    })
+    .then(list => showTasks(list));
+  ///countdowns
+  userRef
+    .collection("countdowns")
+    .get()
+    .then(snapshot => {
+      const list = [];
+      snapshot.forEach(doc => {
+        const dateInSeconds = doc.data().eventDate.seconds;
+        let date = new Date(0);
+        date.setSeconds(dateInSeconds);
+        list.push({ name: doc.id, date });
+      });
+      return list;
+    })
+    .then(list => showCountdowns(list));
+}
 function deleteCountdown(eventName) {
   const db = firebase.firestore();
   const countdowns = db

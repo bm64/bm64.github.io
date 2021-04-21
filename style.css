@@ -108,6 +108,7 @@ input[type="number"] {
 }
 .menu__item {
   width: fit-content;
+  width: -moz-fit-content;
   margin: 2rem auto;
 }
 .menu__link {

@@ -49,15 +49,6 @@ function handleQuantityChange() {
       number.value = 1;
     }
   };
-
-  ////////////////////////////////////
-  //////// modify list////////////////
-  ////////////////////////////////////
-  const deleteItem = item => {
-    console.log(`delete item ${item}`);
-    item.remove();
-  };
-
   quantities.forEach(quantity => {
     const minus = quantity.querySelector(".quantity__minus");
     const plus = quantity.querySelector(".quantity__plus");
@@ -66,32 +57,35 @@ function handleQuantityChange() {
     minus.addEventListener("click", e => changeValue(number, -1));
     plus.addEventListener("click", e => changeValue(number, 1));
     del.addEventListener("click", e => {
-      const item = quantity.parentNode.parentNode;
-      deleteItem(item);
+      const item = e.target.closest(".item").dataset.productName;
+      deleteProduct(item);
+      getData();
     });
   });
 }
 
-// function handleAddItem() {
-//   const input = document.querySelector(".items__add-label");
-//   const btn = document.querySelector(".items__add-btn");
+function handleAddProduct() {
+  const inputBar = document.querySelector(".add-product");
+  if (inputBar === null) {
+    return;
+  }
+  const input = inputBar.querySelector(".items__add-label");
+  const btn = inputBar.querySelector(".items__add-btn");
 
-//   const addItem = input => {
-//     if (input.value !== "") {
-//       products.push({ name: input.value, quantity: 1 });
-//       showProducts();
-//     }
-//     input.value = "";
-//   };
+  input.addEventListener("keyup", e => {
+    if (e.key === "Enter") {
+      addProduct(input.value);
+      input.value = "";
+      getData();
+    }
+  });
 
-//   input.addEventListener("keyup", e => {
-//     if (e.key === "Enter") {
-//       addItem(input);
-//     }
-//   });
-
-//   btn.addEventListener("click", e => addItem(input));
-// }
+  btn.addEventListener("click", e => {
+    addProduct(input.value);
+    input.value = "";
+    getData();
+  });
+}
 
 const hideOptions = () => {
   document.querySelectorAll(".option-btn--active").forEach(btn => {
@@ -158,24 +152,17 @@ const svgs = {
   </svg>`,
 };
 
-const products = [
-  { name: "Milk", quantity: 1 },
-  { name: "Bread", quantity: 2 },
-  { name: "Apple", quantity: 5 },
-  { name: "Avocado", quantity: 3 },
-  { name: "Greek Yogurt", quantity: 21 },
-];
-
-function showProducts() {
+function showProducts(products) {
   const itemList = document.querySelector(".products");
   if (itemList === null) {
     return;
   }
   itemList.textContent = "";
-  products.forEach(({ name, quantity }) => {
+  products.forEach(({ name, quantity, completed }) => {
     const li = document.createElement("li");
 
     li.classList = "items__item item";
+    li.dataset.productName = name;
     li.innerHTML = `
       <div class="item__desc">
       <label class="item__label">
@@ -198,7 +185,6 @@ function showProducts() {
 
 function showTasks(tasks) {
   const taskList = document.querySelector(".tasks-lists");
-  console.log(tasks);
   if (taskList === null) {
     return;
   }
@@ -533,17 +519,35 @@ function handleChangeCountdownTime() {
 }
 function init() {
   handleHamburgerMenu();
-  showProducts();
-  // showCountdowns();
   getData();
-
   handleAddCountdown();
+  handleAddProduct();
 }
 
 //////////////////////////////////////////
 ///////////Firestore//////////////////////
 //////////////////////////////////////////
 
+///////////////////// ShoppingList   ///////////////
+function addProduct(product) {
+  if (product === "") {
+    return;
+  }
+  const db = firebase.firestore();
+  const shoppingList = db
+    .collection("users")
+    .doc(currentUser.uid)
+    .collection("shoppingList");
+  shoppingList.doc(product).set({ quantity: 1, completed: false });
+}
+function deleteProduct(product) {
+  const db = firebase.firestore();
+  const todos = db
+    .collection("users")
+    .doc(currentUser.uid)
+    .collection("shoppingList");
+  todos.doc(product).delete();
+}
 /////////////////// Countdowns ////////////////////
 
 function addCountdown(eventName, eventDate) {
@@ -588,6 +592,22 @@ function getData() {
       return list;
     })
     .then(list => showCountdowns(list));
+  //////shoppinglist
+  userRef
+    .collection("shoppingList")
+    .get()
+    .then(snapshot => {
+      const list = [];
+      snapshot.forEach(doc => {
+        list.push({
+          name: doc.id,
+          quantity: doc.data().quantity,
+          completed: doc.data().completed,
+        });
+      });
+      return list;
+    })
+    .then(list => showProducts(list));
 }
 function deleteCountdown(eventName) {
   const db = firebase.firestore();

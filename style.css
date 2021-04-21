@@ -549,3 +549,28 @@ input[type="number"] {
 }
 
 /* ######### login.html css* ########*/
+/* ######### user.html css* ########*/
+.user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: #f2f2f2;
+}
+
+.logout__button {
+  width: 70%;
+  margin: 0.5rem;
+  color: #ffffff;
+  text-align: center;
+  font-size: 1rem;
+  border-radius: calc(1.2rem * 1.5);
+  outline: none;
+  background-color: #333333;
+  padding: 0.6rem;
+  border: none;
+  cursor: pointer;
+}
+
+/* ######### user.html css* ########*/

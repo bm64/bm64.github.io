@@ -1,6 +1,14 @@
 const db = firebase.firestore();
 console.log(window.location.pathname);
 
+firebase.auth().onAuthStateChanged(function (user) {
+  if (user) {
+    //window.location = "/user";
+  } else {
+    // No user is signed in.
+  }
+});
+
 const handleViewChange = () => {
   const signInView = document.querySelector(".login");
   const signUpView = document.querySelector(".signup");
@@ -31,6 +39,7 @@ function login() {
     .then((userCredential) => {
       // Signed in
       var user = userCredential.user;
+      window.location = "/user";
       // ...
     })
     .catch((error) => {
@@ -46,9 +55,12 @@ function logout() {
     .signOut()
     .then(() => {
       window.alert("Pomyślnie wylogowano");
+      window.location = "/login";
     })
     .catch((error) => {});
 }
+
+const redirectUser = () => (window.location.href = "/user");
 
 function signup() {
   const email = document.getElementById("signin_email").value;
@@ -61,32 +73,13 @@ function signup() {
       const user = userCredential.user;
       const userUid = user.uid;
       console.log(userUid);
-      /*
       db.collection("users")
         .doc(userUid)
-        .collection("shoppingList")
-        .doc("item")
-        .set(
-          {
-            quantity: 0,
-            collected: false,
-          },
-          { merge: true }
-        );
-      db.collection("users")
-        .doc(userUid)
-        .collection("todoLists")
-        .doc("list1")
-        .set(
-          {
-            gotowanie: { completionDate: 27 / 01 / 1998, completed: false },
-          },
-          { merge: true }
-        );
-       */
-      db.collection("users").doc(userUid).set({});
+        .set({})
+        .then(() => {
+          window.location = "/user";
+        });
     })
-
     .catch((error) => {
       var errorCode = error.code;
       var errorMessage = error.message;

@@ -10,7 +10,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 
 function handleCheckboxChange() {
   const checkboxes = document.querySelectorAll(".item__status");
-  const toggleCheckedClass = (e) => {
+  const toggleCheckedClass = e => {
     const label = e.target.parentNode;
     //not toggle to prevent changing it from DOM
     if (e.target.checked) {
@@ -20,7 +20,7 @@ function handleCheckboxChange() {
     }
   };
 
-  checkboxes.forEach((checkbox) => {
+  checkboxes.forEach(checkbox => {
     checkbox.removeEventListener("change", toggleCheckedClass);
     checkbox.addEventListener("change", toggleCheckedClass);
   });
@@ -31,10 +31,10 @@ function handleHamburgerMenu() {
   const items = document.querySelector(".items");
   const menu = document.querySelector(".menu__items");
 
-  hamburger.addEventListener("click", (e) => {
+  hamburger.addEventListener("click", e => {
     menu.classList.toggle("menu__items--active");
   });
-  items.addEventListener("click", (e) => {
+  items.addEventListener("click", e => {
     menu.classList.remove("menu__items--active");
   });
 }
@@ -53,48 +53,48 @@ function handleQuantityChange() {
   ////////////////////////////////////
   //////// modify list////////////////
   ////////////////////////////////////
-  const deleteItem = (item) => {
+  const deleteItem = item => {
     console.log(`delete item ${item}`);
     item.remove();
   };
 
-  quantities.forEach((quantity) => {
+  quantities.forEach(quantity => {
     const minus = quantity.querySelector(".quantity__minus");
     const plus = quantity.querySelector(".quantity__plus");
     const number = quantity.querySelector(".quantity__number");
     const del = quantity.querySelector(".quantity__del-btn");
-    minus.addEventListener("click", (e) => changeValue(number, -1));
-    plus.addEventListener("click", (e) => changeValue(number, 1));
-    del.addEventListener("click", (e) => {
+    minus.addEventListener("click", e => changeValue(number, -1));
+    plus.addEventListener("click", e => changeValue(number, 1));
+    del.addEventListener("click", e => {
       const item = quantity.parentNode.parentNode;
       deleteItem(item);
     });
   });
 }
 
-function handleAddItem() {
-  const input = document.querySelector(".items__add-label");
-  const btn = document.querySelector(".items__add-btn");
+// function handleAddItem() {
+//   const input = document.querySelector(".items__add-label");
+//   const btn = document.querySelector(".items__add-btn");
 
-  const addItem = (input) => {
-    if (input.value !== "") {
-      products.push({ name: input.value, quantity: 1 });
-      showProducts();
-    }
-    input.value = "";
-  };
+//   const addItem = input => {
+//     if (input.value !== "") {
+//       products.push({ name: input.value, quantity: 1 });
+//       showProducts();
+//     }
+//     input.value = "";
+//   };
 
-  input.addEventListener("keyup", (e) => {
-    if (e.key === "Enter") {
-      addItem(input);
-    }
-  });
+//   input.addEventListener("keyup", e => {
+//     if (e.key === "Enter") {
+//       addItem(input);
+//     }
+//   });
 
-  btn.addEventListener("click", (e) => addItem(input));
-}
+//   btn.addEventListener("click", e => addItem(input));
+// }
 
 const hideOptions = () => {
-  document.querySelectorAll(".option-btn--active").forEach((btn) => {
+  document.querySelectorAll(".option-btn--active").forEach(btn => {
     btn.classList.remove("option-btn--active");
   });
 };
@@ -102,7 +102,7 @@ const hideOptions = () => {
 function handleShowOptions() {
   const itemsOptions = document.querySelectorAll(".item__option");
 
-  const showOptions = (btn) => {
+  const showOptions = btn => {
     const btnActive = btn.classList.contains("option-btn--active");
     hideOptions();
     if (!btnActive) {
@@ -110,15 +110,15 @@ function handleShowOptions() {
     }
   };
 
-  itemsOptions.forEach((item) => {
+  itemsOptions.forEach(item => {
     const btn = item.querySelector(".option-btn");
-    btn.removeEventListener("click", (e) => showOptions(btn));
-    btn.addEventListener("click", (e) => showOptions(btn));
+    btn.removeEventListener("click", e => showOptions(btn));
+    btn.addEventListener("click", e => showOptions(btn));
   });
 }
 
 function handleOutsideOptionsClick() {
-  window.addEventListener("click", (e) => {
+  window.addEventListener("click", e => {
     if (e.target.closest(".item__option") === null) {
       hideOptions();
     }
@@ -224,34 +224,31 @@ function showTasks() {
   const tasksOptions = `
   <ul class="options">
     <li class="option">
-      <button class="option__rename">Rename task...</button>
+      <button class="option__rename-task">Rename task...</button>
     </li>
     <li class="option">
-      <button class="option__change-date">
+      <button class="option__change-task-date">
         Change date of complete...
       </button>
     </li>
     <li class="option">
-      <button class="option__move">Move task...</button>
-    </li>
-    <li class="option">
-      <button class="option__delete">Delete task...</button>
+      <button class="option__delete-task">Delete task...</button>
     </li>
   </ul>`;
   const listOptions = `
   <ul class="options">
     <li class="option">
-      <button class="option__rename">Rename list...</button>
+      <button class="option__rename-todo">Rename list...</button>
     </li>
     <li class="option">
-      <button class="option__delete">Delete list...</button>
+      <button class="option__delete-todo">Delete list...</button>
     </li>
   </ul>`;
 
   tasks.forEach(({ listName, tasks: tasksItems }) => {
     const section = document.createElement("section");
     section.classList = "tasks-list";
-    // gdzieś id tu
+    section.dataset.listName = listName;
     section.innerHTML = `
       <div class="tasks-list__desc">
         <h2 class="tasks-list__name">${listName}</h2>
@@ -260,7 +257,7 @@ function showTasks() {
           ${listOptions}
         </div>
       </div>
-      <div class="items__add">
+      <div class="items__add add-task">
         <input class="items__add-label" type="text" name="add-item" placeholder="Add task..."/>
       </div>
       `;
@@ -270,6 +267,7 @@ function showTasks() {
     tasksItems.forEach(({ name }) => {
       const li = document.createElement("li");
       li.classList = "items__item item";
+      li.dataset.itemName = name;
       li.innerHTML = `
         <div class="item__desc">
           <label class="item__label">
@@ -300,20 +298,21 @@ function showCountdowns() {
   const options = `
   <ul class="options">
     <li class="option">
-      <button class="option__rename">Rename event...</button>
+      <button class="option__rename-event">Rename event...</button>
     </li>
     <li class="option">
-      <button class="option__change-date">Change date...</button>
+      <button class="option__change-event-date">Change date...</button>
     </li>
     <li class="option">
-      <button class="option__change-time">Change time...</button>
+      <button class="option__change-event-time">Change time...</button>
     </li>
     <li class="option">
-      <button class="option__delete">Delete event...</button>
+      <button class="option__delete-event">Delete event...</button>
     </li>
   </ul>`;
   countdowns.forEach(({ name, date }) => {
     const section = document.createElement("section");
+    section.dataset.eventName = name;
     const [days, hours, minutes] = [2, 0, 0]; //przeliczyć date
     section.classList = "countdown";
     section.innerHTML = `
@@ -335,40 +334,424 @@ function showCountdowns() {
   handleOutsideOptionsClick();
   handleShowOptions();
 }
+////////////// TODO LIST HANDLERS /////////////////
+function handleAddTodo() {
+  const inputBar = document.querySelector(".add-todo");
+  if (inputBar === null) {
+    return;
+  }
+  const input = inputBar.querySelector(".items__add-label");
+  const btn = inputBar.querySelector(".items__add-btn");
 
+  input.addEventListener("keyup", e => {
+    if (e.key === "Enter") {
+      addTodoList(input.value);
+      input.value = "";
+    }
+  });
+  btn.addEventListener("click", e => {
+    addTodoList(input.value);
+    input.value = "";
+  });
+}
+function handleDeleteTodoList() {
+  const btns = document.querySelectorAll(".option__delete-todo");
+  btns.forEach(btn => {
+    btn.addEventListener("click", e => {
+      const listName = e.target.closest(".tasks-list").dataset.listName;
+      deleteTodoList(listName);
+    });
+  });
+}
+function handleRenameTodoList() {
+  const btns = document.querySelectorAll(".option__rename-todo");
+  btns.forEach(btn => {
+    btn.addEventListener("click", e => {
+      const listName = e.target.closest(".tasks-list").dataset.listName;
+      renameTodoList(listName, "newName");
+    });
+  });
+}
+////////////// TASK HANDLERS /////////////////
+function handleAddTask() {
+  const inputBars = document.querySelectorAll(".add-task");
+  inputBars.forEach(inputBar => {
+    const input = inputBar.querySelector(".items__add-label");
+    input.addEventListener("keyup", e => {
+      if (e.key === "Enter") {
+        const taskName = e.target.value;
+        const listName = e.target.closest(".tasks-list").dataset.listName;
+        const today = new Date();
+        const nextWeek = new Date(
+          today.getFullYear(),
+          today.getMonth(),
+          today.getDate() + 7
+        );
+        addTask(listName, taskName, nextWeek, false);
+        input.value = "";
+      }
+    });
+  });
+}
+function handleDeleteTask() {
+  const btns = document.querySelectorAll(".option__delete-task");
+  btns.forEach(btn => {
+    btn.addEventListener("click", e => {
+      const listName = e.target.closest(".tasks-list").dataset.listName;
+      const taskName = e.target.closest(".item").dataset.itemName;
+
+      deleteTask(listName, taskName);
+    });
+  });
+}
+function handleRenameTask() {
+  const btns = document.querySelectorAll(".option__rename-task");
+  btns.forEach(btn => {
+    btn.addEventListener("click", e => {
+      const listName = e.target.closest(".tasks-list").dataset.listName;
+      const taskName = e.target.closest(".item").dataset.itemName;
+      updateTask(listName, taskName, null, null, "new Name");
+    });
+  });
+}
+function handleChangeTaskDate() {
+  const btns = document.querySelectorAll(".option__change-task-date");
+  btns.forEach(btn => {
+    btn.addEventListener("click", e => {
+      const listName = e.target.closest(".tasks-list").dataset.listName;
+      const taskName = e.target.closest(".item").dataset.itemName;
+      const newDate = new Date();
+      updateTask(listName, taskName, newDate);
+    });
+  });
+}
+//////////////// countdowns handlers //////////////////////
+function handleAddCountdown() {
+  const form = document.querySelector(".countdown-form");
+  if (!form) {
+    return;
+  }
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+    const nameElement = form.querySelector(".countdown-name");
+    const dateElement = form.querySelector(".countdown-date");
+    const timeElement = form.querySelector(".countdown-time");
+
+    const name = nameElement.value;
+    if (!name) {
+      return;
+    }
+    const date = dateElement.value ? dateElement.value : "2021-12-31";
+    const time = timeElement.value ? timeElement.value : "00:00";
+
+    const eventDate = new Date(`${date} ${time}`);
+    addCountdown(name, eventDate);
+    nameElement.value = "";
+    dateElement.value = "";
+    timeElement.value = "";
+  });
+}
+function handleDeleteCountdown() {
+  const btns = document.querySelectorAll(".option__delete-event");
+  btns.forEach(btn => {
+    btn.addEventListener("click", e => {
+      const eventName = e.target.closest(".countdown").dataset.eventName;
+      deleteCountdown(eventName);
+    });
+  });
+}
+function handleRenameCountdown() {
+  const btns = document.querySelectorAll(".option__rename-event");
+  btns.forEach(btn => {
+    btn.addEventListener("click", e => {
+      const eventName = e.target.closest(".countdown").dataset.eventName;
+      renameCountdown(eventName, "new Name");
+    });
+  });
+}
+function handleChangeCountdownDate() {
+  const btns = document.querySelectorAll(".option__change-event-date");
+  btns.forEach(btn => {
+    btn.addEventListener("click", e => {
+      const eventName = e.target.closest(".countdown").dataset.eventName;
+      const db = firebase.firestore();
+      const countdownRef = db
+        .collection("users")
+        .doc(currentUser.uid)
+        .collection("countdowns");
+
+      db.runTransaction(transaction => {
+        return transaction.get(countdownRef.doc(eventName)).then(countdown => {
+          if (!countdown.exists) {
+            return Promise.reject("Sorry, there is no such event");
+          }
+          const dateInSeconds = countdown.data().eventDate.seconds;
+          let date = new Date(0);
+          date.setSeconds(dateInSeconds);
+          date.setFullYear(2021, 2, 3);
+          updateCountdownTime(eventName, date);
+        });
+      }).catch(e => {
+        console.log(`an error occured: ${e}`);
+      });
+    });
+  });
+}
+function handleChangeCountdownTime() {
+  const btns = document.querySelectorAll(".option__change-event-time");
+  btns.forEach(btn => {
+    btn.addEventListener("click", e => {
+      const eventName = e.target.closest(".countdown").dataset.eventName;
+      const db = firebase.firestore();
+      const countdownRef = db
+        .collection("users")
+        .doc(currentUser.uid)
+        .collection("countdowns");
+
+      db.runTransaction(transaction => {
+        return transaction.get(countdownRef.doc(eventName)).then(countdown => {
+          if (!countdown.exists) {
+            return Promise.reject("Sorry, there is no such event");
+          }
+          const dateInSeconds = countdown.data().eventDate.seconds;
+          let date = new Date(0);
+          date.setSeconds(dateInSeconds);
+          date.setHours(13, 15);
+          updateCountdownTime(eventName, date);
+        });
+      }).catch(e => {
+        console.log(`an error occured: ${e}`);
+      });
+    });
+  });
+}
 function init() {
   handleHamburgerMenu();
-  handleAddItem();
+  // handleAddItem();
   showProducts();
   showTasks();
   showCountdowns();
+
+  handleAddTodo();
+  handleAddTask();
+  handleDeleteTodoList();
+  handleRenameTodoList();
+
+  handleDeleteTask();
+  handleRenameTask();
+  handleChangeTaskDate();
+
+  handleAddCountdown();
+  handleDeleteCountdown();
+  handleRenameCountdown();
+  handleChangeCountdownDate();
+  handleChangeCountdownTime();
 }
 
 //////////////////////////////////////////
 ///////////Firestore//////////////////////
 //////////////////////////////////////////
 
-function addChleb() {
-  const db = firebase.firestore();
+init();
 
-  db.collection("users")
-    .doc(currentUser.uid)
-    .collection("shoppingList")
-    .doc("chleb")
-    .update(
-      {
-        quantity: 15,
-        collected: false,
-      },
-      { merge: true }
-    )
-    .then(() => {
-      console.log("Document successfully written!");
-      console.log(currentUser.uid);
+function getData() {
+  const db = firebase.firestore();
+  const userRef = db.collection("users").doc(currentUser.uid);
+  return userRef
+    .get()
+    .then(doc => {
+      if (doc.exists) {
+        console.log(doc.data());
+        return doc.data();
+      } else {
+        console.log("no data");
+      }
     })
-    .catch((error) => {
-      console.error("Error writing document: ", error);
-      window.alert(error);
+    .catch(e => {
+      console.log(`Error getting document: ${e}`);
     });
 }
-init();
+
+/////////////////// Countdowns ////////////////////
+
+function addCountdown(eventName, eventDate) {
+  const db = firebase.firestore();
+  const date = firebase.firestore.Timestamp.fromDate(eventDate);
+  const countdowns = db
+    .collection("users")
+    .doc(currentUser.uid)
+    .collection("countdowns");
+  countdowns.doc(eventName).set({ eventDate: date });
+}
+
+function deleteCountdown(eventName) {
+  const db = firebase.firestore();
+  const countdowns = db
+    .collection("users")
+    .doc(currentUser.uid)
+    .collection("countdowns");
+  countdowns.doc(eventName).delete();
+}
+
+function updateCountdownTime(eventName, newTime) {
+  const db = firebase.firestore();
+  const date = firebase.firestore.Timestamp.fromDate(newTime);
+  const countdowns = db
+    .collection("users")
+    .doc(currentUser.uid)
+    .collection("countdowns");
+  countdowns.doc(eventName).update({ eventDate: date });
+}
+
+function renameCountdown(oldName, newName) {
+  const db = firebase.firestore();
+  const countdownRef = db
+    .collection("users")
+    .doc(currentUser.uid)
+    .collection("countdowns");
+
+  db.runTransaction(transaction => {
+    return transaction.get(countdownRef.doc(oldName)).then(countdown => {
+      if (!countdown.exists) {
+        return Promise.reject("Sorry, there is no such event");
+      }
+      const dateInSeconds = countdown.data().eventDate.seconds;
+      let date = new Date(0);
+      date.setSeconds(dateInSeconds);
+
+      addCountdown(newName, date);
+      deleteCountdown(oldName);
+    });
+  }).catch(e => {
+    console.log(`an error occured: ${e}`);
+  });
+}
+
+//////////////////////// todos //////////////////////
+function addTodoList(listName) {
+  if (listName === "") {
+    return;
+  }
+  const db = firebase.firestore();
+  const todos = db
+    .collection("users")
+    .doc(currentUser.uid)
+    .collection("todoLists");
+  todos.doc(listName).set({});
+}
+
+function deleteTodoList(listName) {
+  const db = firebase.firestore();
+  const todos = db
+    .collection("users")
+    .doc(currentUser.uid)
+    .collection("todoLists");
+  todos.doc(listName).delete();
+}
+
+function renameTodoList(oldName, newName) {
+  const db = firebase.firestore();
+  const listRef = db
+    .collection("users")
+    .doc(currentUser.uid)
+    .collection("todoLists")
+    .doc(oldName);
+
+  db.runTransaction(transaction => {
+    return transaction.get(listRef).then(list => {
+      if (!list.exists) {
+        return Promise.reject("Sorry, there is no such list");
+      }
+      const tasks = list.data().tasks ? list.data().tasks : [];
+
+      db.collection("users")
+        .doc(currentUser.uid)
+        .collection("todoLists")
+        .doc(newName)
+        .set({ tasks });
+      deleteTodoList(oldName);
+    });
+  }).catch(e => {
+    console.log(`an error occured: ${e}`);
+  });
+}
+
+function addTask(listName, taskName, date, status) {
+  const db = firebase.firestore();
+  const list = db
+    .collection("users")
+    .doc(currentUser.uid)
+    .collection("todoLists")
+    .doc(listName);
+  list.update({
+    tasks: firebase.firestore.FieldValue.arrayUnion({
+      taskName,
+      date,
+      status,
+    }),
+  });
+}
+
+function deleteTask(listName, taskName) {
+  const db = firebase.firestore();
+  const listRef = db
+    .collection("users")
+    .doc(currentUser.uid)
+    .collection("todoLists")
+    .doc(listName);
+
+  db.runTransaction(transaction => {
+    return transaction.get(listRef).then(list => {
+      if (!list.exists) {
+        return Promise.reject("Sorry, there is no such list");
+      }
+      const tasks = list.data().tasks;
+      const newTasks = tasks.filter(task => task.taskName !== taskName);
+      transaction.update(listRef, { tasks: newTasks });
+    });
+  }).catch(e => {
+    console.log(`an error occured: ${e}`);
+  });
+}
+
+function updateTask(
+  listName,
+  taskName,
+  newDate = null,
+  newStatus = null,
+  newName = null
+) {
+  const db = firebase.firestore();
+  const listRef = db
+    .collection("users")
+    .doc(currentUser.uid)
+    .collection("todoLists")
+    .doc(listName);
+
+  db.runTransaction(transaction => {
+    return transaction.get(listRef).then(list => {
+      if (!list.exists) {
+        return Promise.reject("Sorry, there is no such list");
+      }
+      const tasks = list.data().tasks;
+      const newTasks = tasks.map(task => {
+        if (task.taskName === taskName) {
+          if (newName !== null) {
+            task.taskName = newName;
+          }
+          if (newDate !== null) {
+            const date = firebase.firestore.Timestamp.fromDate(newDate);
+            task.date = date;
+          }
+          if (newStatus !== null) {
+            task.status = newStatus;
+          }
+        }
+        return task;
+      });
+      transaction.update(listRef, { tasks: newTasks });
+    });
+  }).catch(e => {
+    console.log(`an error occured: ${e}`);
+  });
+}

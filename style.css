@@ -198,6 +198,9 @@ input[type="number"] {
   cursor: pointer;
   outline: none;
 }
+.items__add-btn:disabled {
+  cursor: auto;
+}
 @media (min-width: 380px) {
   .items {
     padding: 1rem;

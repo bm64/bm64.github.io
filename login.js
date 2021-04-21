@@ -1,19 +1,33 @@
 const db = firebase.firestore();
+console.log(window.location.pathname);
 
 firebase.auth().onAuthStateChanged(function (user) {
   if (user) {
-    document.getElementById("login_div").style.display = "none";
-    document.getElementById("user_div").style.display = "flex";
-    var user = firebase.auth().currentUser;
-    if (user != null) {
-      var email_id = user.email;
-      document.getElementById("user_details").innerHTML = "Email: " + email_id;
-    }
+    //window.location = "/user";
   } else {
-    document.getElementById("login_div").style.display = "flex";
-    document.getElementById("user_div").style.display = "none";
+    // No user is signed in.
   }
 });
+
+const handleViewChange = () => {
+  const signInView = document.querySelector(".login");
+  const signUpView = document.querySelector(".signup");
+  const goToSignup = document.querySelector(".goToSignup");
+  const goToSignin = document.querySelector(".goToSignin");
+  console.log(goToSignin);
+  goToSignin.addEventListener("click", (e) => {
+    signInView.style.display = "flex";
+    signUpView.style.display = "none";
+  });
+  goToSignup.addEventListener("click", (e) => {
+    signInView.style.display = "none";
+    signUpView.style.display = "flex";
+  });
+};
+
+handleViewChange();
+
+firebase.auth().onAuthStateChanged(function (user) {});
 
 function login() {
   var userEmail = document.getElementById("email_field").value;
@@ -25,6 +39,7 @@ function login() {
     .then((userCredential) => {
       // Signed in
       var user = userCredential.user;
+      window.location = "/user";
       // ...
     })
     .catch((error) => {
@@ -40,6 +55,7 @@ function logout() {
     .signOut()
     .then(() => {
       window.alert("Pomyślnie wylogowano");
+      window.location = "/login";
     })
     .catch((error) => {});
 }
@@ -55,32 +71,13 @@ function signup() {
       const user = userCredential.user;
       const userUid = user.uid;
       console.log(userUid);
-      /*
       db.collection("users")
         .doc(userUid)
-        .collection("shoppingList")
-        .doc("item")
-        .set(
-          {
-            quantity: 0,
-            collected: false,
-          },
-          { merge: true }
-        );
-      db.collection("users")
-        .doc(userUid)
-        .collection("todoLists")
-        .doc("list1")
-        .set(
-          {
-            gotowanie: { completionDate: 27 / 01 / 1998, completed: false },
-          },
-          { merge: true }
-        );
-       */
-      db.collection("users").doc(userUid).set({});
+        .set({})
+        .then(() => {
+          window.location = "/user";
+        });
     })
-
     .catch((error) => {
       var errorCode = error.code;
       var errorMessage = error.message;
@@ -93,3 +90,45 @@ function googleLogin() {
   console.log(provider);
   firebase.auth().signInWithRedirect(provider);
 }
+
+firebase
+  .auth()
+  .getRedirectResult()
+  .then((result) => {
+    if (result.credential) {
+      /** @type {firebase.auth.OAuthCredential} */
+      var credential = result.credential;
+
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      var token = credential.accessToken;
+      /*
+      db.collection("users")
+        .doc(userUid)
+        .set({})
+        .then(() => {
+          window.location = "/user";
+        });
+        */
+    }
+    // The signed-in user info.
+    const userUid = result.user.uid;
+    console.log(userUid);
+    db.collection("users")
+      .doc(userUid)
+      .set({})
+      .then(() => {
+        window.location = "/user";
+      });
+  })
+  .catch((error) => {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    window.alert("Error: " + errorMessage);
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+
+    // ...
+  });

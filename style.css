@@ -543,15 +543,4 @@ input[type="number"] {
   margin: 0.2rem;
 }
 
-.user {
-  display: none;
-  margin: 200px auto;
-  display: flex;
-  flex-direction: column;
-  max-width: 600px;
-  background-color: #171717;
-  padding: 50px;
-  color: #e7e7e7;
-}
-
 /* ######### login.html css* ########*/

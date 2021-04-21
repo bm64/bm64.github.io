@@ -7,11 +7,11 @@ const handleViewChange = () => {
   const goToSignup = document.querySelector(".goToSignup");
   const goToSignin = document.querySelector(".goToSignin");
   console.log(goToSignin);
-  goToSignin.addEventListener("click", function () {
+  goToSignin.addEventListener("click", (e) => {
     signInView.style.display = "flex";
     signUpView.style.display = "none";
   });
-  goToSignup.addEventListener("click", function () {
+  goToSignup.addEventListener("click", (e) => {
     signInView.style.display = "none";
     signUpView.style.display = "flex";
   });
@@ -19,22 +19,7 @@ const handleViewChange = () => {
 
 handleViewChange();
 
-firebase.auth().onAuthStateChanged(function (user) {
-  /*
-  if (user) {
-    document.getElementById("login_div").style.display = "none";
-    document.getElementById("user_div").style.display = "flex";
-    var user = firebase.auth().currentUser;
-    if (user != null) {
-      var email_id = user.email;
-      document.getElementById("user_details").innerHTML = "Email: " + email_id;
-    }
-  } else {
-    document.getElementById("login_div").style.display = "flex";
-    document.getElementById("user_div").style.display = "none";
-  }
-  */
-});
+firebase.auth().onAuthStateChanged(function (user) {});
 
 function login() {
   var userEmail = document.getElementById("email_field").value;

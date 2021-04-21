@@ -272,13 +272,9 @@ function showCountdowns(countdowns) {
   const options = `
   <ul class="options">
     <li class="option">
-<<<<<<< HEAD
-      <button class="option__rename-event">Rename event...</button>
-=======
       <button 
       onClick="showModal()" 
-      class="option__rename">Rename event...</button>
->>>>>>> develop_mati
+      class="option__rename-event">Rename event...</button>
     </li>
     <li class="option">
       <button class="option__change-event-date">Change date...</button>

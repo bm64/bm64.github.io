@@ -2,10 +2,22 @@ const db = firebase.firestore();
 console.log(window.location.pathname);
 
 const handleViewChange = () => {
-  if (window.location.pathname === "/login") {
-  } else {
-  }
+  const signInView = document.querySelector(".login");
+  const signUpView = document.querySelector(".signup");
+  const goToSignup = document.querySelector(".goToSignup");
+  const goToSignin = document.querySelector(".goToSignin");
+  console.log(goToSignin);
+  goToSignin.addEventListener("click", function () {
+    signInView.style.display = "flex";
+    signUpView.style.display = "none";
+  });
+  goToSignup.addEventListener("click", function () {
+    signInView.style.display = "none";
+    signUpView.style.display = "flex";
+  });
 };
+
+handleViewChange();
 
 firebase.auth().onAuthStateChanged(function (user) {
   /*

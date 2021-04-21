@@ -502,9 +502,9 @@ input[type="number"] {
   padding: 1rem 2.5rem;
 }
 .signup {
+  display: none;
   width: 100%;
   margin: auto;
-  display: flex;
   flex-direction: column;
   align-items: center;
   max-width: 400px;

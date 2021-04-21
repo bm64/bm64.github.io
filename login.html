@@ -95,7 +95,7 @@
       <h1 class="signin__info">
         Signing-in is required to identify your data
       </h1>
-      <div class="login" id="login_div">
+      <div class="login" id="signin">
         <div class="signin__input">
         <input class="signin__input-label" placeholder="Enter your email" type="email" id="email_field" /></div>
         <div class="signin__input">
@@ -107,7 +107,9 @@
         >Log In with Google</button>
         <div class="signup__text">
         <p>You don’t have an account yet?</p>
-        <p style="color: #3bdcb5; cursor:pointer">Sign up here</p></div>
+        <p style="color: #3bdcb5; cursor:pointer"
+        class="goToSignup"
+        >Sign up here</p></div>
       </div>
       <div class="signup" id="signin_div">
         <div class="signin__input">
@@ -115,6 +117,12 @@
         <div class="signin__input">
         <input class="signin__input-label"  placeholder="Enter your password" type="password" id="signin_password" /></div>
         <button class="login__button" onClick="signup()">Zaloz konto</button>
+        <div class="signup__text">
+        <p>You have an account already?</p>
+        <p 
+        class="goToSignin"
+        style="color: #3bdcb5; cursor:pointer"
+        >Sign in here</p></div>
       </div>
 
 

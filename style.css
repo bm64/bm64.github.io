@@ -435,6 +435,7 @@ input[type="number"] {
 .avatar {
   margin-top: 77px;
   padding: 2.5rem;
+  background-color: #f2f2f2;
 }
 
 .avatar__img {
@@ -449,6 +450,7 @@ input[type="number"] {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  background-color: #f2f2f2;
 }
 
 .signin__info {
@@ -460,6 +462,7 @@ input[type="number"] {
   width: 100%;
   margin: 0px;
   font-weight: normal;
+  background-color: #f2f2f2;
 }
 
 .signin__header {
@@ -500,6 +503,7 @@ input[type="number"] {
   align-items: center;
   max-width: 400px;
   padding: 1rem 2.5rem;
+  background-color: #f2f2f2;
 }
 .signup {
   display: none;
@@ -509,6 +513,7 @@ input[type="number"] {
   align-items: center;
   max-width: 400px;
   padding: 1rem 2.5rem;
+  background-color: #f2f2f2;
 }
 
 .login__button {

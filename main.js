@@ -3,10 +3,28 @@ firebase.auth().onAuthStateChanged(function (user) {
   if (user) {
     currentUser = user;
     init();
+
+    if (window.location.pathname === "/login") {
+      window.location = "/user";
+    } else {
+      return null;
+    }
   } else {
-    // No user is signed in.
+    if (window.location.pathname !== "/login") {
+      window.location = "/login";
+    } else {
+      return null;
+    }
   }
 });
+
+const handleUserEmail = () => {
+  if (window.location.pathname === "/user") {
+    document.querySelector("#userEmail").innerHTML = `${currentUser.email}`;
+  } else {
+    return null;
+  }
+};
 
 function handleCheckboxChange() {
   const checkboxes = document.querySelectorAll(".item__status");
@@ -526,6 +544,7 @@ function handleChangeCountdownTime() {
   });
 }
 function init() {
+  handleUserEmail();
   handleHamburgerMenu();
   getData();
   handleAddCountdown();

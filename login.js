@@ -1,6 +1,22 @@
 const db = firebase.firestore();
 console.log(window.location.pathname);
-
+/*
+firebase.auth().onAuthStateChanged(function (user) {
+  if (user) {
+    if (window.location.pathname === "/login") {
+      window.location = "/user";
+    } else {
+      return null;
+    }
+  } else {
+    if (window.location.pathname !== "/login") {
+      window.location = "/login";
+    } else {
+      return null;
+    }
+  }
+});
+*/
 const handleViewChange = () => {
   const signInView = document.querySelector(".login");
   const signUpView = document.querySelector(".signup");

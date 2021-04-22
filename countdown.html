@@ -13,12 +13,46 @@
     <title>TodoApp | Countdown</title>
   </head>
   <body>
-    <div class="modal">
+    <div class="modal" id="eventModal">
       <div class="modal__dialog">
         <div class="modal__input">
-          <input class="modal__input-label" />
+          <input
+            class="modal__input-label"
+            placeholder="New event name..."
+            id="eventModalInput"
+          />
         </div>
-        <button class="modal__button" onClick="hideModal()">Save</button>
+        <button class="modal__button" onClick="handleEventChange()">
+          Save
+        </button>
+      </div>
+    </div>
+    <div class="modal" id="eventDateModal">
+      <div class="modal__dialog">
+        <div class="modal__input">
+          <input
+            class="modal__input-label"
+            placeholder="New date (yyyy-mm-dd)"
+            id="eventDateInput"
+          />
+        </div>
+        <button class="modal__button" onClick="handleEventDateChange()">
+          Save
+        </button>
+      </div>
+    </div>
+    <div class="modal" id="eventTimeModal">
+      <div class="modal__dialog">
+        <div class="modal__input">
+          <input
+            class="modal__input-label"
+            placeholder="New event time (hh:mm)"
+            id="eventTimeInput"
+          />
+        </div>
+        <button class="modal__button" onClick="handleEventTimeChange()">
+          Save
+        </button>
       </div>
     </div>
     <div class="container">

@@ -270,14 +270,18 @@ function showCountdowns(countdowns) {
   <ul class="options">
     <li class="option">
       <button 
-      onClick="showModal()" 
-      class="option__rename-event"">Rename event...</button>
+      onClick="showEventModal()"
+      class="option__rename-event">Rename event...</button>
     </li>
     <li class="option">
-      <button class="option__change-event-date">Change date...</button>
+      <button class="option__change-event-date"
+      onClick="showDateModal()" 
+      >Change date...</button>
     </li>
     <li class="option">
-      <button class="option__change-event-time">Change time...</button>
+      <button
+      onClick="showTimeModal()" 
+      class="option__change-event-time">Change time...</button>
     </li>
     <li class="option">
       <button class="option__delete-event">Delete event...</button>
@@ -437,26 +441,33 @@ function handleDeleteCountdown() {
     });
   });
 }
+
+var selectedEvent;
+
 function handleRenameCountdown() {
   const btns = document.querySelectorAll(".option__rename-event");
   btns.forEach((btn) => {
     btn.addEventListener("click", (e) => {
       const eventName = e.target.closest(".countdown").dataset.eventName;
-      renameCountdown(eventName, "new Name");
+      selectedEvent = eventName;
+      //renameCountdown(eventName, "new Name");
+      getData();
     });
   });
 }
+var selectedDate;
 function handleChangeCountdownDate() {
   const btns = document.querySelectorAll(".option__change-event-date");
+
   btns.forEach((btn) => {
     btn.addEventListener("click", (e) => {
       const eventName = e.target.closest(".countdown").dataset.eventName;
+      selectedEvent = eventName;
       const db = firebase.firestore();
       const countdownRef = db
         .collection("users")
         .doc(currentUser.uid)
         .collection("countdowns");
-
       db.runTransaction((transaction) => {
         return transaction
           .get(countdownRef.doc(eventName))
@@ -467,8 +478,10 @@ function handleChangeCountdownDate() {
             const dateInSeconds = countdown.data().eventDate.seconds;
             let date = new Date(0);
             date.setSeconds(dateInSeconds);
-            date.setFullYear(2021, 2, 3);
-            updateCountdownTime(eventName, date);
+            selectedDate = date;
+            //date.setFullYear(2021, 2, 3);
+            //updateCountdownTime(eventName, date);
+            getData();
           });
       }).catch((e) => {
         console.log(`an error occured: ${e}`);
@@ -476,11 +489,15 @@ function handleChangeCountdownDate() {
     });
   });
 }
+
+var selectedTime;
+
 function handleChangeCountdownTime() {
   const btns = document.querySelectorAll(".option__change-event-time");
   btns.forEach((btn) => {
     btn.addEventListener("click", (e) => {
       const eventName = e.target.closest(".countdown").dataset.eventName;
+      selectedEvent = eventName;
       const db = firebase.firestore();
       const countdownRef = db
         .collection("users")
@@ -497,8 +514,10 @@ function handleChangeCountdownTime() {
             const dateInSeconds = countdown.data().eventDate.seconds;
             let date = new Date(0);
             date.setSeconds(dateInSeconds);
-            date.setHours(13, 15);
-            updateCountdownTime(eventName, date);
+            selectedTime = date;
+            //date.setHours(13, 15);
+            //updateCountdownTime(eventName, date);
+            getData();
           });
       }).catch((e) => {
         console.log(`an error occured: ${e}`);
@@ -589,7 +608,9 @@ function getData() {
       });
       return list;
     })
-    .then((list) => showCountdowns(list));
+    .then((list) => {
+      showCountdowns(list);
+    });
   //////shoppinglist
   userRef
     .collection("shoppingList")
@@ -808,12 +829,55 @@ function updateTask(
 ///////////modal/////////////////////
 /////////////////////////////////////
 
-const showModal = () => {
-  const modal = document.querySelector(".modal");
+const showEventModal = () => {
+  const modal = document.querySelector("#eventModal");
   modal.style.display = "block";
 };
+
+const showDateModal = () => {
+  const modal = document.querySelector("#eventDateModal");
+  modal.style.display = "block";
+};
+const showTimeModal = () => {
+  const modal = document.querySelector("#eventTimeModal");
+  modal.style.display = "block";
+};
+
 const hideModal = () => {
   const modal = document.querySelector(".modal");
+  const input = document.querySelector(".modal__input-label");
+  console.log(input.value);
+  modal.style.display = "none";
+};
+
+const handleEventChange = () => {
+  const modal = document.querySelector("#eventDateModal");
+  const input = document.querySelector("#eventModalInput");
+  renameCountdown(selectedEvent, input.value);
+  modal.style.display = "none";
+};
+
+const handleEventDateChange = () => {
+  const modal = document.querySelector("#eventDateModal");
+  const input = document.querySelector("#eventDateInput");
+  let newDate = input.value.split("-");
+  newDate = newDate.map((e) => Number(e));
+  let year = newDate[0];
+  let month = newDate[1] - 1;
+  let day = newDate[2];
+  selectedDate.setFullYear(year, month, day);
+  updateCountdownTime(selectedEvent, selectedDate);
+  modal.style.display = "none";
+};
+
+const handleEventTimeChange = () => {
+  const modal = document.querySelector("#eventTimeModal");
+  const input = document.querySelector("#eventTimeInput");
+  let newTime = input.value.split(":");
+  newTime = newTime.map((e) => Number(e));
+  console.log(newTime);
+  selectedTime.setHours(newTime[0], newTime[1]);
+  updateCountdownTime(selectedEvent, selectedTime);
   modal.style.display = "none";
 };
 

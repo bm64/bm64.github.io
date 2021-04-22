@@ -1,0 +1,17 @@
+{
+    "name": "TodoApp",
+    "short_name": "TodoApp",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#f2f2f2",
+    "description": "",
+    "lang": "en-EN",
+    "theme_color": "#3bdcb5" ,
+    "icons": [
+      {
+       "src": "./icon.png",
+       "sizes": "120x122",
+       "type": "image/png"
+      }
+     ]
+  }

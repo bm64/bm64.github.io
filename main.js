@@ -502,11 +502,11 @@ function handleChangeCountdownDate() {
           }
           const dateInSeconds = countdown.data().eventDate.seconds;
           let date = new Date(0);
-          date.setSeconds(dateInSeconds);
+          date.setSeconds(dateInSeconds + 3600);
           selectedDate = date;
           //date.setFullYear(2021, 2, 3);
           //updateCountdownTime(eventName, date);
-          getData();
+          // getData();
         });
       }).catch(e => {
         console.log(`an error occured: ${e}`);
@@ -536,7 +536,7 @@ function handleChangeCountdownTime() {
           }
           const dateInSeconds = countdown.data().eventDate.seconds;
           let date = new Date(0);
-          date.setSeconds(dateInSeconds);
+          date.setSeconds(dateInSeconds + 3600);
           selectedTime = date;
           //date.setHours(13, 15);
           //updateCountdownTime(eventName, date);
@@ -641,7 +641,7 @@ function getData() {
       snapshot.forEach(doc => {
         const dateInSeconds = doc.data().eventDate.seconds;
         let date = new Date(0);
-        date.setSeconds(dateInSeconds);
+        date.setSeconds(dateInSeconds + 3600);
         list.push({ name: doc.id, date });
       });
       return list;
@@ -707,7 +707,7 @@ function renameCountdown(oldName, newName) {
         }
         const dateInSeconds = countdown.data().eventDate.seconds;
         let date = new Date(0);
-        date.setSeconds(dateInSeconds);
+        date.setSeconds(dateInSeconds + 3600);
 
         addCountdown(newName, date);
         deleteCountdown(oldName);

@@ -224,7 +224,9 @@ function showTasks(tasks) {
   const listOptions = `
   <ul class="options">
     <li class="option">
-      <button class="option__rename-todo">Rename list...</button>
+      <button
+      onClick="showTodoListModal()" 
+      class="option__rename-todo">Rename list...</button>
     </li>
     <li class="option">
       <button class="option__delete-todo">Delete list...</button>
@@ -365,12 +367,16 @@ function handleDeleteTodoList() {
     });
   });
 }
+
+var previousListName;
+
 function handleRenameTodoList() {
   const btns = document.querySelectorAll(".option__rename-todo");
   btns.forEach((btn) => {
     btn.addEventListener("click", (e) => {
       const listName = e.target.closest(".tasks-list").dataset.listName;
-      renameTodoList(listName, "newName");
+      previousListName = listName;
+      //renameTodoList(listName, "newName");
     });
   });
 }
@@ -876,6 +882,20 @@ const showDateModal = () => {
 const showTimeModal = () => {
   const modal = document.querySelector("#eventTimeModal");
   modal.style.display = "block";
+};
+
+const showTodoListModal = () => {
+  const modal = document.querySelector("#todoListModal");
+  modal.style.display = "block";
+};
+
+const handleListNameChange = () => {
+  const modal = document.querySelector("#todoListModal");
+  const input = document.querySelector("#todoListInput");
+
+  renameTodoList(previousListName, input.value);
+
+  modal.style.display = "none";
 };
 
 const handleEventChange = () => {

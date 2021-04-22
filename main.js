@@ -11,12 +11,23 @@ firebase.auth().onAuthStateChanged(function (user) {
 function handleCheckboxChange() {
   const checkboxes = document.querySelectorAll(".item__status");
   const toggleCheckedClass = e => {
-    const label = e.target.parentNode;
-    //not toggle to prevent changing it from DOM
-    if (e.target.checked) {
-      label.classList.add("item__label--checked");
+    const taskName = e.target.closest(".item").dataset.itemName;
+    const productName = e.target.closest(".item").dataset.productName;
+    const label = e.target.closest(".item__label");
+    if (!label.classList.contains("item__label--checked")) {
+      if (taskName) {
+        const listName = e.target.closest(".tasks-list").dataset.listName;
+        updateTask(listName, taskName, null, true);
+      } else {
+        updateProduct(productName, true);
+      }
     } else {
-      label.classList.remove("item__label--checked");
+      if (taskName) {
+        const listName = e.target.closest(".tasks-list").dataset.listName;
+        updateTask(listName, taskName, null, false);
+      } else {
+        updateProduct(productName, false);
+      }
     }
   };
 
@@ -162,8 +173,8 @@ function showProducts(products) {
     li.dataset.productName = name;
     li.innerHTML = `
       <div class="item__desc">
-      <label class="item__label">
-      <input type="checkbox" class="item__status" />
+      <label class="item__label ${completed ? "item__label--checked" : ""}">
+      <input type="checkbox" class="item__status" checked=${completed} />
       <span class="item__name"> ${name}</span>
       </label>
       <div class="item__quantity quantity">
@@ -219,14 +230,14 @@ function showTasks(tasks) {
       `;
     const ul = document.createElement("ul");
     ul.classList = "items__list";
-    tasksItems.forEach(({ taskName: name }) => {
+    tasksItems.forEach(({ taskName: name, status: completed }) => {
       const li = document.createElement("li");
       li.classList = "items__item item";
       li.dataset.itemName = name;
       li.innerHTML = `
         <div class="item__desc">
-          <label class="item__label">
-            <input type="checkbox" class="item__status" />
+          <label class="item__label ${completed ? "item__label--checked" : ""}">
+            <input type="checkbox" class="item__status" checked=${completed} />
             <span class="item__name"> ${name} </span>
           </label>
           <div class="item__option">
@@ -531,6 +542,20 @@ function deleteProduct(product) {
     .delete()
     .then(() => getData());
 }
+function updateProduct(product, completed) {
+  if (product === "") {
+    return;
+  }
+  const db = firebase.firestore();
+  const shoppingList = db
+    .collection("users")
+    .doc(currentUser.uid)
+    .collection("shoppingList");
+  shoppingList
+    .doc(product)
+    .update({ completed })
+    .then(() => getData());
+}
 /////////////////// Countdowns ////////////////////
 
 function addCountdown(eventName, eventDate) {
@@ -762,34 +787,33 @@ function updateTask(
     .doc(listName);
 
   db.runTransaction(transaction => {
-    return transaction
-      .get(listRef)
-      .then(list => {
-        if (!list.exists) {
-          return Promise.reject("Sorry, there is no such list");
-        }
-        const tasks = list.data().tasks;
-        const newTasks = tasks.map(task => {
-          if (task.taskName === taskName) {
-            if (newName !== null) {
-              task.taskName = newName;
-            }
-            if (newDate !== null) {
-              const date = firebase.firestore.Timestamp.fromDate(newDate);
-              task.date = date;
-            }
-            if (newStatus !== null) {
-              task.status = newStatus;
-            }
+    return transaction.get(listRef).then(list => {
+      if (!list.exists) {
+        return Promise.reject("Sorry, there is no such list");
+      }
+      const tasks = list.data().tasks;
+      const newTasks = tasks.map(task => {
+        if (task.taskName === taskName) {
+          if (newName !== null) {
+            task.taskName = newName;
           }
-          return task;
-        });
-        transaction.update(listRef, { tasks: newTasks });
-      })
-      .then(() => getData());
-  }).catch(e => {
-    console.log(`an error occured: ${e}`);
-  });
+          if (newDate !== null) {
+            const date = firebase.firestore.Timestamp.fromDate(newDate);
+            task.date = date;
+          }
+          if (newStatus !== null) {
+            task.status = newStatus;
+          }
+        }
+        return task;
+      });
+      transaction.update(listRef, { tasks: newTasks });
+    });
+  })
+    .then(() => getData())
+    .catch(e => {
+      console.log(`an error occured: ${e}`);
+    });
 }
 
 /////////////////////////////////////

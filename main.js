@@ -189,14 +189,6 @@ function showTasks(tasks) {
   const tasksOptions = `
   <ul class="options">
     <li class="option">
-      <button class="option__rename-task">Rename task...</button>
-    </li>
-    <li class="option">
-      <button class="option__change-task-date">
-        Change date of complete...
-      </button>
-    </li>
-    <li class="option">
       <button class="option__delete-task">Delete task...</button>
     </li>
   </ul>`;

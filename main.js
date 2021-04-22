@@ -59,7 +59,6 @@ function handleQuantityChange() {
     del.addEventListener("click", (e) => {
       const item = e.target.closest(".item").dataset.productName;
       deleteProduct(item);
-      getData();
     });
   });
 }
@@ -76,14 +75,12 @@ function handleAddProduct() {
     if (e.key === "Enter") {
       addProduct(input.value);
       input.value = "";
-      getData();
     }
   });
 
   btn.addEventListener("click", (e) => {
     addProduct(input.value);
     input.value = "";
-    getData();
   });
 }
 
@@ -274,7 +271,7 @@ function showCountdowns(countdowns) {
     <li class="option">
       <button 
       onClick="showModal()" 
-      class="option__rename-event">Rename event...</button>
+      class="option__rename-event"">Rename event...</button>
     </li>
     <li class="option">
       <button class="option__change-event-date">Change date...</button>
@@ -289,7 +286,7 @@ function showCountdowns(countdowns) {
   countdowns.forEach(({ name, date }) => {
     const section = document.createElement("section");
     section.dataset.eventName = name;
-    const [days, hours, minutes] = [2, 0, 0]; //przeliczyć date
+    section.dataset.eventDate = date;
     section.classList = "countdown";
     section.innerHTML = `
     <div class="countdown__desc">
@@ -301,9 +298,7 @@ function showCountdowns(countdowns) {
     </div>
     <p class="countdown__text">time left:</p>
     <div class="countdown__time">
-      <span class="countdown__day">${days}D</span
-      ><span class="countdown__hours">${hours}H</span
-      ><span class="countdown__minutes">${minutes}M</span>
+      almost ready...
     </div>`;
     countdownList.appendChild(section);
   }); //end countdowns foreach
@@ -314,6 +309,7 @@ function showCountdowns(countdowns) {
   handleRenameCountdown();
   handleChangeCountdownDate();
   handleChangeCountdownTime();
+  countdown();
 }
 ////////////// TODO LIST HANDLERS /////////////////
 function handleAddTodo() {
@@ -328,13 +324,11 @@ function handleAddTodo() {
     if (e.key === "Enter") {
       addTodoList(input.value);
       input.value = "";
-      getData();
     }
   });
   btn.addEventListener("click", (e) => {
     addTodoList(input.value);
     input.value = "";
-    getData();
   });
 }
 function handleDeleteTodoList() {
@@ -343,7 +337,6 @@ function handleDeleteTodoList() {
     btn.addEventListener("click", (e) => {
       const listName = e.target.closest(".tasks-list").dataset.listName;
       deleteTodoList(listName);
-      getData();
     });
   });
 }
@@ -353,7 +346,6 @@ function handleRenameTodoList() {
     btn.addEventListener("click", (e) => {
       const listName = e.target.closest(".tasks-list").dataset.listName;
       renameTodoList(listName, "newName");
-      getData();
     });
   });
 }
@@ -374,7 +366,6 @@ function handleAddTask() {
         );
         addTask(listName, taskName, nextWeek, false);
         input.value = "";
-        getData();
       }
     });
   });
@@ -387,7 +378,6 @@ function handleDeleteTask() {
       const taskName = e.target.closest(".item").dataset.itemName;
 
       deleteTask(listName, taskName);
-      getData();
     });
   });
 }
@@ -398,7 +388,6 @@ function handleRenameTask() {
       const listName = e.target.closest(".tasks-list").dataset.listName;
       const taskName = e.target.closest(".item").dataset.itemName;
       updateTask(listName, taskName, null, null, "new Name");
-      getData();
     });
   });
 }
@@ -410,7 +399,6 @@ function handleChangeTaskDate() {
       const taskName = e.target.closest(".item").dataset.itemName;
       const newDate = new Date();
       updateTask(listName, taskName, newDate);
-      getData();
     });
   });
 }
@@ -438,7 +426,6 @@ function handleAddCountdown() {
     nameElement.value = "";
     dateElement.value = "";
     timeElement.value = "";
-    getData();
   });
 }
 function handleDeleteCountdown() {
@@ -447,7 +434,6 @@ function handleDeleteCountdown() {
     btn.addEventListener("click", (e) => {
       const eventName = e.target.closest(".countdown").dataset.eventName;
       deleteCountdown(eventName);
-      getData();
     });
   });
 }
@@ -457,7 +443,6 @@ function handleRenameCountdown() {
     btn.addEventListener("click", (e) => {
       const eventName = e.target.closest(".countdown").dataset.eventName;
       renameCountdown(eventName, "new Name");
-      getData();
     });
   });
 }
@@ -484,7 +469,6 @@ function handleChangeCountdownDate() {
             date.setSeconds(dateInSeconds);
             date.setFullYear(2021, 2, 3);
             updateCountdownTime(eventName, date);
-            getData();
           });
       }).catch((e) => {
         console.log(`an error occured: ${e}`);
@@ -515,7 +499,6 @@ function handleChangeCountdownTime() {
             date.setSeconds(dateInSeconds);
             date.setHours(13, 15);
             updateCountdownTime(eventName, date);
-            getData();
           });
       }).catch((e) => {
         console.log(`an error occured: ${e}`);
@@ -544,7 +527,10 @@ function addProduct(product) {
     .collection("users")
     .doc(currentUser.uid)
     .collection("shoppingList");
-  shoppingList.doc(product).set({ quantity: 1, completed: false });
+  shoppingList
+    .doc(product)
+    .set({ quantity: 1, completed: false })
+    .then(() => getData());
 }
 function deleteProduct(product) {
   const db = firebase.firestore();
@@ -552,7 +538,10 @@ function deleteProduct(product) {
     .collection("users")
     .doc(currentUser.uid)
     .collection("shoppingList");
-  todos.doc(product).delete();
+  todos
+    .doc(product)
+    .delete()
+    .then(() => getData());
 }
 /////////////////// Countdowns ////////////////////
 
@@ -563,7 +552,10 @@ function addCountdown(eventName, eventDate) {
     .collection("users")
     .doc(currentUser.uid)
     .collection("countdowns");
-  countdowns.doc(eventName).set({ eventDate: date });
+  countdowns
+    .doc(eventName)
+    .set({ eventDate: date })
+    .then(() => getData());
 }
 function getData() {
   const db = firebase.firestore();
@@ -621,7 +613,10 @@ function deleteCountdown(eventName) {
     .collection("users")
     .doc(currentUser.uid)
     .collection("countdowns");
-  countdowns.doc(eventName).delete();
+  countdowns
+    .doc(eventName)
+    .delete()
+    .then(() => getData());
 }
 
 function updateCountdownTime(eventName, newTime) {
@@ -631,7 +626,10 @@ function updateCountdownTime(eventName, newTime) {
     .collection("users")
     .doc(currentUser.uid)
     .collection("countdowns");
-  countdowns.doc(eventName).update({ eventDate: date });
+  countdowns
+    .doc(eventName)
+    .update({ eventDate: date })
+    .then(() => getData());
 }
 
 function renameCountdown(oldName, newName) {
@@ -642,17 +640,20 @@ function renameCountdown(oldName, newName) {
     .collection("countdowns");
 
   db.runTransaction((transaction) => {
-    return transaction.get(countdownRef.doc(oldName)).then((countdown) => {
-      if (!countdown.exists) {
-        return Promise.reject("Sorry, there is no such event");
-      }
-      const dateInSeconds = countdown.data().eventDate.seconds;
-      let date = new Date(0);
-      date.setSeconds(dateInSeconds);
+    return transaction
+      .get(countdownRef.doc(oldName))
+      .then((countdown) => {
+        if (!countdown.exists) {
+          return Promise.reject("Sorry, there is no such event");
+        }
+        const dateInSeconds = countdown.data().eventDate.seconds;
+        let date = new Date(0);
+        date.setSeconds(dateInSeconds);
 
-      addCountdown(newName, date);
-      deleteCountdown(oldName);
-    });
+        addCountdown(newName, date);
+        deleteCountdown(oldName);
+      })
+      .then(() => getData());
   }).catch((e) => {
     console.log(`an error occured: ${e}`);
   });
@@ -668,7 +669,10 @@ function addTodoList(listName) {
     .collection("users")
     .doc(currentUser.uid)
     .collection("todoLists");
-  todos.doc(listName).set({});
+  todos
+    .doc(listName)
+    .set({})
+    .then(() => getData());
 }
 
 function deleteTodoList(listName) {
@@ -677,7 +681,10 @@ function deleteTodoList(listName) {
     .collection("users")
     .doc(currentUser.uid)
     .collection("todoLists");
-  todos.doc(listName).delete();
+  todos
+    .doc(listName)
+    .delete()
+    .then(() => getData());
 }
 
 function renameTodoList(oldName, newName) {
@@ -689,19 +696,22 @@ function renameTodoList(oldName, newName) {
     .doc(oldName);
 
   db.runTransaction((transaction) => {
-    return transaction.get(listRef).then((list) => {
-      if (!list.exists) {
-        return Promise.reject("Sorry, there is no such list");
-      }
-      const tasks = list.data().tasks ? list.data().tasks : [];
+    return transaction
+      .get(listRef)
+      .then((list) => {
+        if (!list.exists) {
+          return Promise.reject("Sorry, there is no such list");
+        }
+        const tasks = list.data().tasks ? list.data().tasks : [];
 
-      db.collection("users")
-        .doc(currentUser.uid)
-        .collection("todoLists")
-        .doc(newName)
-        .set({ tasks });
-      deleteTodoList(oldName);
-    });
+        db.collection("users")
+          .doc(currentUser.uid)
+          .collection("todoLists")
+          .doc(newName)
+          .set({ tasks });
+        deleteTodoList(oldName);
+      })
+      .then(() => getData());
   }).catch((e) => {
     console.log(`an error occured: ${e}`);
   });
@@ -714,13 +724,15 @@ function addTask(listName, taskName, date, status) {
     .doc(currentUser.uid)
     .collection("todoLists")
     .doc(listName);
-  list.update({
-    tasks: firebase.firestore.FieldValue.arrayUnion({
-      taskName,
-      date,
-      status,
-    }),
-  });
+  list
+    .update({
+      tasks: firebase.firestore.FieldValue.arrayUnion({
+        taskName,
+        date,
+        status,
+      }),
+    })
+    .then(() => getData());
 }
 
 function deleteTask(listName, taskName) {
@@ -740,9 +752,11 @@ function deleteTask(listName, taskName) {
       const newTasks = tasks.filter((task) => task.taskName !== taskName);
       transaction.update(listRef, { tasks: newTasks });
     });
-  }).catch((e) => {
-    console.log(`an error occured: ${e}`);
-  });
+  })
+    .then(() => getData())
+    .catch((e) => {
+      console.log(`an error occured: ${e}`);
+    });
 }
 
 function updateTask(
@@ -760,28 +774,31 @@ function updateTask(
     .doc(listName);
 
   db.runTransaction((transaction) => {
-    return transaction.get(listRef).then((list) => {
-      if (!list.exists) {
-        return Promise.reject("Sorry, there is no such list");
-      }
-      const tasks = list.data().tasks;
-      const newTasks = tasks.map((task) => {
-        if (task.taskName === taskName) {
-          if (newName !== null) {
-            task.taskName = newName;
-          }
-          if (newDate !== null) {
-            const date = firebase.firestore.Timestamp.fromDate(newDate);
-            task.date = date;
-          }
-          if (newStatus !== null) {
-            task.status = newStatus;
-          }
+    return transaction
+      .get(listRef)
+      .then((list) => {
+        if (!list.exists) {
+          return Promise.reject("Sorry, there is no such list");
         }
-        return task;
-      });
-      transaction.update(listRef, { tasks: newTasks });
-    });
+        const tasks = list.data().tasks;
+        const newTasks = tasks.map((task) => {
+          if (task.taskName === taskName) {
+            if (newName !== null) {
+              task.taskName = newName;
+            }
+            if (newDate !== null) {
+              const date = firebase.firestore.Timestamp.fromDate(newDate);
+              task.date = date;
+            }
+            if (newStatus !== null) {
+              task.status = newStatus;
+            }
+          }
+          return task;
+        });
+        transaction.update(listRef, { tasks: newTasks });
+      })
+      .then(() => getData());
   }).catch((e) => {
     console.log(`an error occured: ${e}`);
   });
@@ -799,3 +816,30 @@ const hideModal = () => {
   const modal = document.querySelector(".modal");
   modal.style.display = "none";
 };
+
+/////////////////////////////////////
+///////////countdown/////////////////
+/////////////////////////////////////
+function countdown() {
+  const countdowns = document.querySelectorAll(".countdown");
+  countdowns.forEach((countdown) => {
+    const targetDate = new Date(countdown.dataset.eventDate);
+    const ans = countdown.querySelector(".countdown__time");
+
+    const showDate = () => {
+      const nowDate = new Date();
+      const remainingTime = (targetDate - nowDate) / 1000;
+      if (remainingTime < 0) {
+        ans.textContent = `it's too late`;
+        return;
+      }
+      const d = Math.floor(remainingTime / (60 * 60 * 24));
+      const h = Math.floor((remainingTime / (60 * 60)) % 24);
+      const m = Math.floor((remainingTime / 60) % 60);
+      const s = Math.floor(remainingTime % 60);
+      ans.textContent = `${d}D ${h}H ${m}M ${s}S `;
+    };
+    showDate();
+    setInterval(showDate, 1000);
+  });
+}

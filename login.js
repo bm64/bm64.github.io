@@ -62,7 +62,7 @@ function logout() {
     .signOut()
     .then(() => {
       window.alert("Pomyślnie wylogowano");
-      window.location = "/login";
+      window.location = "/";
     })
     .catch((error) => {});
 }

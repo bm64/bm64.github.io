@@ -862,15 +862,8 @@ const showTimeModal = () => {
   modal.style.display = "block";
 };
 
-const hideModal = () => {
-  const modal = document.querySelector(".modal");
-  const input = document.querySelector(".modal__input-label");
-  console.log(input.value);
-  modal.style.display = "none";
-};
-
 const handleEventChange = () => {
-  const modal = document.querySelector("#eventDateModal");
+  const modal = document.querySelector("#eventModal");
   const input = document.querySelector("#eventModalInput");
   renameCountdown(selectedEvent, input.value);
   modal.style.display = "none";

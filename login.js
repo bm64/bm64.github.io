@@ -97,7 +97,7 @@ firebase
       console.log(userUid);
       db.collection("users")
         .doc(userUid)
-        .set({})
+        .set({}, { merge: true })
         .then(() => {
           window.location = "/user";
         });
